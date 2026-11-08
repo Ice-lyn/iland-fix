@@ -30,7 +30,7 @@ else
 end
 
 
-function getNameByXuid(name)
+function getXuidByName(name)
     local result = llgetXuidByName(name)
     if result == "" then
         return nil
@@ -39,7 +39,7 @@ function getNameByXuid(name)
     end
 end
 
---这个地方写反了小问题
+-- 修复铭记留下的函数语义问题
 function getXuidByName(xuid)
     local result = llgetNameByXuid(xuid)
     if result == "" then
@@ -2630,7 +2630,7 @@ OpenGUI = {
                         local status_list = {}
                         if res == 0 then -- add
                             for n, ID in pairs(selected) do
-                                local targetXuid = getNameByXuid(ID)
+                                local targetXuid = getXuidByName(ID)
                                 if Land.RelationShip.Owner.getXuid(landId) == targetXuid then
                                     status_list[ID] = _Tr('gui.landtrust.fail.cantaddown')
                                     goto CONTINUE_ADDTRUST
@@ -2644,7 +2644,7 @@ OpenGUI = {
                             end
                         elseif res == 1 then -- rm
                             for n, ID in pairs(selected) do
-                                local targetXuid = getNameByXuid(ID)
+                                local targetXuid = getXuidByName(ID)
                                 Land.RelationShip.Trusted.remove(landId, targetXuid)
                                 status_list[ID] = _Tr('gui.landtrust.rmsuccess')
                             end
@@ -2712,7 +2712,7 @@ OpenGUI = {
                                 return
                             end
 
-                            local targetXuid = getNameByXuid(selected[1])
+                            local targetXuid = getXuidByName(selected[1])
                             if Land.RelationShip.Owner.check(landId, targetXuid) then
                                 SendText(pl, _Tr('title.landtransfer.canttoown'))
                                 return
@@ -4461,7 +4461,7 @@ function RegisterCommands()
     end)
     mc.regConsoleCmd('land op', _Tr('command.console.land_op'), function(args)
         local name = table.concat(args, ' ')
-        local xuid = getNameByXuid(name)
+        local xuid = getXuidByName(name)
         local stat = Land.RelationShip.Operator.add(xuid)
         if stat == 0 then
             INFO('System', _Tr('console.landop.add.success', '<a>', name, '<b>', xuid))
@@ -4473,7 +4473,7 @@ function RegisterCommands()
     end)
     mc.regConsoleCmd('land deop', _Tr('command.console.land_deop'), function(args)
         local name = table.concat(args, ' ')
-        local xuid = getNameByXuid(name)
+        local xuid = getXuidByName(name)
         local stat = Land.RelationShip.Operator.remove(xuid)
         if stat == 0 then
             INFO('System', _Tr('console.landop.del.success', '<a>', name, '<b>', xuid))
