@@ -66,7 +66,7 @@ Plugin = {
             return 201
         end
     },
-    minLL = {2, 1, 0}
+    minLL = { 2, 1, 0 }
 }
 
 Server = {
@@ -116,7 +116,7 @@ local cfg = {
                 enable = true,
                 calculate = "{square}*25"
             },
-            square_range = {4, 50000},
+            square_range = { 4, 50000 },
             discount = 1
         },
         min_space = 15,
@@ -145,9 +145,9 @@ local cfg = {
             include_offline_players = true
         },
         selection = {
-            dimension = {true, -- overworld
-            true, -- nether
-            true -- end
+            dimension = { true, -- overworld
+                true,           -- nether
+                true            -- end
             },
             tool_type = "minecraft:wooden_axe",
             tool_name = "Wooden Axe"
@@ -155,7 +155,7 @@ local cfg = {
         landtp = true,
         force_talk = false,
         disable_creative_warn = false,
-        disabled_listener = {'onDropItem'},
+        disabled_listener = { 'onDropItem' },
         chunk_side = 16
     }
 }
@@ -187,9 +187,11 @@ function INFO(msgtype, content)
     end
     logger.info(content)
 end
+
 function ERROR(content)
     logger.error(content)
 end
+
 function WARN(content)
     logger.warn(content)
 end
@@ -284,7 +286,6 @@ Map = {
                     end
                 end
             end
-
         end
     },
     Land = {
@@ -400,7 +401,7 @@ Map = {
         build = function()
             Map.Control.data = {
                 -- # UseItem
-                [0] = Array.ToKeyMap({'minecraft:bed', 'minecraft:chest', 'minecraft:trapped_chest',
+                [0] = Array.ToKeyMap({ 'minecraft:bed', 'minecraft:chest', 'minecraft:trapped_chest',
                                       'minecraft:crafting_table', 'minecraft:campfire', 'minecraft:soul_campfire',
                                       'minecraft:composter', 'minecraft:undyed_shulker_box', 'minecraft:shulker_box',
                                       'minecraft:noteblock', 'minecraft:jukebox', 'minecraft:bell',
@@ -420,28 +421,28 @@ Map = {
                                       'minecraft:warped_fence_gate', 'minecraft:wooden_door', 'minecraft:spruce_door',
                                       'minecraft:birch_door', 'minecraft:jungle_door', 'minecraft:acacia_door',
                                       'minecraft:dark_oak_door', 'minecraft:crimson_door', 'minecraft:warped_door',
-                                      'minecraft:dragon_egg'}),
+                    'minecraft:dragon_egg' }),
                 -- # onBlockInteracted
-                [1] = Array.ToKeyMap({'minecraft:cartography_table', 'minecraft:smithing_table', 'minecraft:furnace',
+                [1] = Array.ToKeyMap({ 'minecraft:cartography_table', 'minecraft:smithing_table', 'minecraft:furnace',
                                       'minecraft:blast_furnace', 'minecraft:smoker', 'minecraft:brewing_stand',
                                       'minecraft:anvil', 'minecraft:grindstone', 'minecraft:enchanting_table',
                                       'minecraft:barrel', 'minecraft:beacon', 'minecraft:hopper', 'minecraft:dropper',
                                       'minecraft:dispenser', 'minecraft:loom', 'minecraft:stonecutter_block',
-                                      'minecraft:lit_furnace', 'minecraft:lit_blast_furnace', 'minecraft:lit_smoker'}),
+                    'minecraft:lit_furnace', 'minecraft:lit_blast_furnace', 'minecraft:lit_smoker' }),
                 -- # ItemWhiteList
-                [2] = Array.ToKeyMap({'minecraft:glow_ink_sac', 'minecraft:end_crystal', 'minecraft:ender_eye',
+                [2] = Array.ToKeyMap({ 'minecraft:glow_ink_sac', 'minecraft:end_crystal', 'minecraft:ender_eye',
                                       'minecraft:axolotl_bucket', 'minecraft:powder_snow_bucket',
                                       'minecraft:pufferfish_bucket', 'minecraft:tropical_fish_bucket',
                                       'minecraft:salmon_bucket', 'minecraft:cod_bucket', 'minecraft:water_bucket',
                                       'minecraft:cod_bucket', 'minecraft:lava_bucket', 'minecraft:bucket',
                                       'minecraft:flint_and_steel', 'minecraft:skull', 'minecraft:wooden_axe',
                                       'minecraft:stone_axe', 'minecraft:iron_axe', 'minecraft:golden_axe',
-                                      'minecraft:diamond_axe', 'minecraft:netherite_axe', 'minecraft:banner'}),
+                    'minecraft:diamond_axe', 'minecraft:netherite_axe', 'minecraft:banner' }),
                 -- # Special attack.
-                [3] = Array.ToKeyMap({'minecraft:ender_crystal', 'minecraft:armor_stand'}),
+                [3] = Array.ToKeyMap({ 'minecraft:ender_crystal', 'minecraft:armor_stand' }),
                 -- # EntityTypeList
                 [4] = {
-                    animals = Array.ToKeyMap({'minecraft:axolotl', 'minecraft:bat', 'minecraft:cat',
+                    animals = Array.ToKeyMap({ 'minecraft:axolotl', 'minecraft:bat', 'minecraft:cat',
                                               'minecraft:chicken', 'minecraft:cod', 'minecraft:cow', 'minecraft:donkey',
                                               'minecraft:fox', 'minecraft:glow_squid', 'minecraft:horse',
                                               'minecraft:mooshroom', 'minecraft:mule', 'minecraft:ocelot',
@@ -463,11 +464,12 @@ Map = {
                     'minecraft:silverfish', 'minecraft:skeleton', 'minecraft:skeleton_horse', 'minecraft:slime',
                     'minecraft:vex', 'minecraft:vindicator', 'minecraft:witch', 'minecraft:wither_skeleton',
                     'minecraft:zoglin', 'minecraft:zombie', 'minecraft:zombie_villager_v2', 'minecraft:piglin_brute',
-                    'minecraft:ender_dragon', 'minecraft:dragon_fireball', 'minecraft:wither', 'minecraft:wither_skull',
-                    'minecraft:wither_skull_dangerous'})
+                        'minecraft:ender_dragon', 'minecraft:dragon_fireball', 'minecraft:wither',
+                        'minecraft:wither_skull',
+                        'minecraft:wither_skull_dangerous' })
                 },
                 -- # AttackBlock
-                [5] = Array.ToKeyMap({'minecraft:dragon_egg'})
+                [5] = Array.ToKeyMap({ 'minecraft:dragon_egg' })
             }
         end,
         check = function(mode, name)
@@ -488,7 +490,7 @@ Map = {
         SinglePos = {
             data = {},
             land_recorded_pos = {}, -- query recorded strpos by landId.
-            non_land_pos = {}, -- non-land position recorded.
+            non_land_pos = {},      -- non-land position recorded.
             add = function(landId, pos)
                 local strpos = Pos.ToString(pos, true)
                 local map = Map.CachedQuery.SinglePos
@@ -697,7 +699,7 @@ I18N = {
             local stat = I18N.Load(lang)
             if stat == 0 then
                 cfg.plugin.language = lang
-                DataStorage.Save({1, 0, 0})
+                DataStorage.Save({ 1, 0, 0 })
             end
             return stat
         end,
@@ -808,7 +810,6 @@ DataStorage = {
     Config = {
 
         Load = function()
-
             --- Init.
             local save = false
 
@@ -855,10 +856,9 @@ DataStorage = {
 
             -- Save if needed.
             if save then
-                DataStorage.Save({1, 0, 0})
+                DataStorage.Save({ 1, 0, 0 })
             end
             return true
-
         end,
         Update = function(origin)
             if not origin.version or origin.version < 240 then
@@ -877,7 +877,7 @@ DataStorage = {
                 tpl.land.bought.two_dimension.enable = origin.features.land_2D
                 tpl.land.bought.two_dimension.calculate_method = origin.land_buy.calculation_2D
                 tpl.land.bought.two_dimension.price = origin.land_buy.price_2D
-                tpl.land.bought.square_range = {origin.land.land_min_square, origin.land.land_max_square}
+                tpl.land.bought.square_range = { origin.land.land_min_square, origin.land.land_max_square }
                 tpl.land.bought.discount = origin.money.discount / 100
                 tpl.land.refund_rate = origin.land_buy.refund_rate
                 tpl.economic.protocol = origin.money.protocol
@@ -910,12 +910,12 @@ DataStorage = {
             end
             if origin.version < 262 then
                 if type(origin.land.bought.square_range) ~= 'table' then
-                    origin.land.bought.square_range = {4, 50000}
+                    origin.land.bought.square_range = { 4, 50000 }
                 end
             end
             if origin.version < 270 then
                 local sec = origin.features.selection
-                sec.dimension = {true, true, true}
+                sec.dimension = { true, true, true }
                 if Array.Fetch(sec.disable_dimension, 0) then
                     sec.dimension[1] = false
                 end
@@ -949,7 +949,6 @@ DataStorage = {
         Raw = {},
         Unloaded = {},
         Load = function()
-
             --- Init.
             local save = false
 
@@ -989,7 +988,7 @@ DataStorage = {
 
             --- Save if needed.
             if save then
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Save({ 0, 1, 0 })
             end
             return true
         end,
@@ -1140,7 +1139,6 @@ DataStorage = {
         Raw = {},
         Unloaded = {},
         Load = function()
-
             --- Init.
             local rel = DataStorage.RelationShip
             local save = false
@@ -1188,7 +1186,7 @@ DataStorage = {
 
             --- Save if needed.
             if save then
-                DataStorage.Save({0, 0, 1})
+                DataStorage.Save({ 0, 0, 1 })
             end
 
             return true
@@ -1207,7 +1205,7 @@ DataStorage = {
 
     },
 
-    _stat = {false, false, false}, -- { Config, Land, RelationShip }
+    _stat = { false, false, false }, -- { Config, Land, RelationShip }
     INTERVAL = function()
         if DataStorage._stat[1] then
             DataStorage._stat[1] = false
@@ -1259,7 +1257,7 @@ Economy = {
     },
     Protocol = {
         IsVaild = function(name)
-            return Array.Fetch({'llmoney', 'scoreboard'}, string.lower(name)) ~= nil
+            return Array.Fetch({ 'llmoney', 'scoreboard' }, string.lower(name)) ~= nil
         end,
         get = function()
             return Economy.Status.protocol
@@ -1311,7 +1309,6 @@ Land = {
     Storage = {
 
         Create = function(xuid, AABB)
-
             --- Check land.
             if not Land.Util.IsCollision(AABB).status then
                 return nil
@@ -1320,7 +1317,7 @@ Land = {
             --- Land storage.
             local posA, posB, dimid = AABB.posA, AABB.posB, AABB.dimid
             local landId = Land.IDManager.Create()
-            if not EventSystem.Call(EventSystem._ev_int['onCreate'], 'Before', {landId, xuid, AABB}) then
+            if not EventSystem.Call(EventSystem._ev_int['onCreate'], 'Before', { landId, xuid, AABB }) then
                 return nil
             end
             local tpl = DataStorage.Land.Template.Create()
@@ -1343,13 +1340,12 @@ Land = {
             Map.CachedQuery.RangeArea.clear_by_land(landId)
             Map.CachedQuery.SinglePos.check_noland_pos()
 
-            DataStorage.Save({0, 1, 1})
-            EventSystem.Call(EventSystem._ev_int['onCreate'], 'After', {landId, xuid, AABB})
+            DataStorage.Save({ 0, 1, 1 })
+            EventSystem.Call(EventSystem._ev_int['onCreate'], 'After', { landId, xuid, AABB })
             return landId
-
         end,
         Delete = function(landId)
-            if not EventSystem.Call(EventSystem._ev_int['onDelete'], 'Before', {landId}) then
+            if not EventSystem.Call(EventSystem._ev_int['onDelete'], 'Before', { landId }) then
                 return false
             end
             Land.RelationShip.Owner.destroy(landId)
@@ -1360,8 +1356,8 @@ Land = {
             Map.Chunk.update(landId, 'del')
             Map.Land.Position.update(landId, 'del')
             DataStorage.Land.Raw[landId] = nil
-            DataStorage.Save({0, 1, 1})
-            EventSystem.Call(EventSystem._ev_int['onDelete'], 'After', {landId})
+            DataStorage.Save({ 0, 1, 1 })
+            EventSystem.Call(EventSystem._ev_int['onDelete'], 'After', { landId })
             return true
         end
 
@@ -1375,7 +1371,7 @@ Land = {
             end,
             set = function(landId, item, value)
                 DataStorage.Land.Raw[landId].permissions[item] = value
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Save({ 0, 1, 0 })
                 return true
             end
         },
@@ -1386,7 +1382,7 @@ Land = {
             end,
             set = function(landId, item, value)
                 DataStorage.Land.Raw[landId].settings[item] = value
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Save({ 0, 1, 0 })
                 return true
             end
         },
@@ -1398,8 +1394,8 @@ Land = {
                 return Array.ToIntPos(pos)
             end,
             set = function(landId, pos)
-                DataStorage.Land.Raw[landId].settings.teleport = {pos[1], pos[2], pos[3]}
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Land.Raw[landId].settings.teleport = { pos[1], pos[2], pos[3] }
+                DataStorage.Save({ 0, 1, 0 })
             end
         },
 
@@ -1437,7 +1433,6 @@ Land = {
     Query = {
 
         Pos = function(pos, noAccessCache)
-
             noAccessCache = noAccessCache or false
             if not noAccessCache then
                 local hadCache, result = Map.CachedQuery.SinglePos.get(pos)
@@ -1489,7 +1484,7 @@ Land = {
                 end
             end
             local function shortest(...)
-                local tar = {...}
+                local tar = { ... }
                 local result = tar[1]
                 for i = 2, #tar do
                     if #tar[i] < #result then
@@ -1587,9 +1582,9 @@ Land = {
         end,
         Reset = function(landId, AABB)
             local posA, posB, dimid = AABB.posA, AABB.posB, AABB.dimid
-            if not Land.Util.IsCollision(AABB, {landId}).status then
+            if not Land.Util.IsCollision(AABB, { landId }).status then
                 return false
-            elseif not EventSystem.Call(EventSystem._ev_int['onChangeRange'], 'Before', {landId, AABB}) then
+            elseif not EventSystem.Call(EventSystem._ev_int['onChangeRange'], 'Before', { landId, AABB }) then
                 return false
             end
             Map.Chunk.update(landId, 'del')
@@ -1606,7 +1601,7 @@ Land = {
             Map.CachedQuery.SinglePos.refresh(landId)
             Map.CachedQuery.RangeArea.clear_by_land(landId)
             Map.CachedQuery.SinglePos.check_noland_pos()
-            DataStorage.Save({0, 1, 0})
+            DataStorage.Save({ 0, 1, 0 })
             return true
         end
 
@@ -1651,7 +1646,7 @@ Land = {
                 end
                 table.insert(cfg.land.operator, #cfg.land.operator + 1, xuid)
                 Map.Land.Operator.update()
-                DataStorage.Save({1, 0, 0})
+                DataStorage.Save({ 1, 0, 0 })
                 return 0
             end,
             remove = function(xuid)
@@ -1662,7 +1657,7 @@ Land = {
                 end
                 Array.Remove(cfg.land.operator, xuid)
                 Map.Land.Operator.update()
-                DataStorage.Save({1, 0, 0})
+                DataStorage.Save({ 1, 0, 0 })
                 return 0
             end,
             check = function(xuid)
@@ -1682,14 +1677,14 @@ Land = {
                 return DataStorage.RelationShip.Raw['Owner'][xuid] or {}
             end,
             set = function(landId, xuid)
-                if not EventSystem.Call(EventSystem._ev_int['onChangeOwner'], 'Before', {landId, xuid}) then
+                if not EventSystem.Call(EventSystem._ev_int['onChangeOwner'], 'Before', { landId, xuid }) then
                     return false
                 end
                 Land.RelationShip.Owner.destroy(landId)
                 DataStorage.RelationShip.Raw['Owner'][xuid] = DataStorage.RelationShip.Raw['Owner'][xuid] or {}
                 DataStorage.RelationShip.Raw['Owner'][xuid][#DataStorage.RelationShip.Raw['Owner'][xuid] + 1] = landId
                 Map.Land.Owner.update(landId)
-                DataStorage.Save({0, 0, 1})
+                DataStorage.Save({ 0, 0, 1 })
                 return true
             end,
             destroy = function(landId) -- it makes a non-owner land.
@@ -1698,7 +1693,7 @@ Land = {
                     return false
                 end
                 Array.Remove(DataStorage.RelationShip.Raw['Owner'][owner], landId)
-                DataStorage.Save({0, 0, 1})
+                DataStorage.Save({ 0, 0, 1 })
                 return true
             end,
             check = function(landId, xuid)
@@ -1722,22 +1717,22 @@ Land = {
                 local share = DataStorage.Land.Raw[landId].settings.share
                 if Land.RelationShip.Trusted.check(landId, xuid) then
                     return false
-                elseif not EventSystem.Call(EventSystem._ev_int['onChangeTrust'], 'Before', {landId, 0, xuid}) then
+                elseif not EventSystem.Call(EventSystem._ev_int['onChangeTrust'], 'Before', { landId, 0, xuid }) then
                     return false
                 end
                 share[#share + 1] = xuid
                 Map.Land.Trusted.update(landId)
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Save({ 0, 1, 0 })
                 return true
             end,
             remove = function(landId, xuid)
-                if not EventSystem.Call(EventSystem._ev_int['onChangeTrust'], 'Before', {landId, 1, xuid}) then
+                if not EventSystem.Call(EventSystem._ev_int['onChangeTrust'], 'Before', { landId, 1, xuid }) then
                     return false
                 end
                 local share = DataStorage.Land.Raw[landId].settings.share
                 Array.Remove(share, xuid)
                 Map.Land.Trusted.update(landId)
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Save({ 0, 1, 0 })
                 return true
             end,
             check = function(landId, xuid)
@@ -1762,7 +1757,7 @@ Land = {
             end,
             CheckNilArgument = function(...)
                 local count = 0
-                local args = {...}
+                local args = { ... }
                 for i, v in ipairs(args) do
                     count = count + 1
                 end
@@ -1981,7 +1976,7 @@ ConfigUIEditor = {
 			Default:
 				Auto get from cfg(cfgpath) if extradata = nil.
 		]]
-        if not Array.Fetch({'input', 'switch', 'dropdown', 'percent_slider', 'slider', 'step_slider'}, uitype) then
+        if not Array.Fetch({ 'input', 'switch', 'dropdown', 'percent_slider', 'slider', 'step_slider' }, uitype) then
             WARN('Unknown component: ' .. uitype)
             return false
         end
@@ -2059,7 +2054,7 @@ ConfigUIEditor = {
                     end
                 end
             end
-            DataStorage.Save({1, 0, 0})
+            DataStorage.Save({ 1, 0, 0 })
             I18N.Load(cfg.plugin.language)
             player:sendModalForm(_Tr('gui.general.complete'), "Complete.", _Tr('gui.general.back'),
                 _Tr('gui.general.close'), Callback.Form.BackTo.LandOPMgr)
@@ -2069,7 +2064,6 @@ ConfigUIEditor = {
 
 OpenGUI = {
     FastLMgr = function(player, landId)
-
         local xuid = player.xuid
         if not Land.IDManager.IsVaild(landId) then
             OpenGUI.LMgr(player)
@@ -2137,7 +2131,6 @@ OpenGUI = {
         end)
     end,
     OPLMgr = function(player)
-
         local Form = mc.newSimpleForm()
         Form:setTitle(_Tr('gui.oplandmgr.landmgr.title'))
         Form:setContent(_Tr('gui.oplandmgr.landmgr.tip'))
@@ -2221,7 +2214,6 @@ OpenGUI = {
                     elseif mode == 3 then -- 返回
                         Callback.Form.BackTo.LandOPMgr(player, true)
                     end
-
                 end)
             elseif id == 1 then -- Manage Plugin
                 local origin = ConfigUIEditor.Create(_Tr('gui.oplandmgr.plugin.title'), _Tr('gui.oplandmgr.plugin.tip'))
@@ -2266,7 +2258,7 @@ OpenGUI = {
                 ConfigUIEditor.AddComponent(origin, class.land, 'switch', 'this.features.selection.dimension.(*)2')
                 ConfigUIEditor.AddComponent(origin, class.land, 'switch', 'this.features.selection.dimension.(*)3')
                 ConfigUIEditor.AddComponent(origin, class.economic, 'dropdown', 'this.economic.protocol',
-                    {'llmoney', 'scoreboard'})
+                    { 'llmoney', 'scoreboard' })
                 ConfigUIEditor.AddComponent(origin, class.economic, 'dropdown', 'this.economic.scoreboard_objname',
                     getAllObjectives())
                 ConfigUIEditor.AddComponent(origin, class.economic, 'input', 'this.economic.currency_name')
@@ -2398,14 +2390,12 @@ OpenGUI = {
                     end
 
                     Map.Listener.build()
-                    DataStorage.Save({1, 0, 0})
+                    DataStorage.Save({ 1, 0, 0 })
                     player:sendModalForm(_Tr('gui.general.complete'), "Complete.", _Tr('gui.general.back'),
                         _Tr('gui.general.close'), Callback.Form.BackTo.LandOPMgr)
-
                 end)
             end
         end)
-
     end,
     LandOptions = {
         Information = function(player, landId)
@@ -2458,7 +2448,7 @@ OpenGUI = {
                 settings.ev_fire_spread = res[6]
                 settings.ev_piston_push = res[7]
                 settings.ev_redstone_update = res[8]
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Save({ 0, 1, 0 })
                 player:sendModalForm(_Tr('gui.general.complete'), 'Complete.', _Tr('gui.general.back'),
                     _Tr('gui.general.close'), Callback.Form.BackTo.LandMgr)
             end)
@@ -2595,7 +2585,7 @@ OpenGUI = {
                 perm.use_fishing_hook = get()
                 perm.use_bucket = get()
 
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Save({ 0, 1, 0 })
                 player:sendModalForm(_Tr('gui.general.complete'), 'Complete.', _Tr('gui.general.back'),
                     _Tr('gui.general.close'), Callback.Form.BackTo.LandMgr)
             end)
@@ -2680,7 +2670,7 @@ OpenGUI = {
                     return
                 end
                 DataStorage.Land.Raw[landId].settings.nickname = string.gsub(res[1], '%%', '％')
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Save({ 0, 1, 0 })
                 player:sendModalForm(_Tr('gui.general.complete'), 'Complete.', _Tr('gui.general.back'),
                     _Tr('gui.general.close'), Callback.Form.BackTo.LandMgr)
             end)
@@ -2700,7 +2690,7 @@ OpenGUI = {
                 end
 
                 DataStorage.Land.Raw[landId].settings.describe = string.gsub(res[1], '%%', '％')
-                DataStorage.Save({0, 1, 0})
+                DataStorage.Save({ 0, 1, 0 })
                 player:sendModalForm(_Tr('gui.general.complete'), 'Complete.', _Tr('gui.general.back'),
                     _Tr('gui.general.close'), Callback.Form.BackTo.LandMgr)
             end)
@@ -2751,9 +2741,9 @@ OpenGUI = {
                         id = landId
                     }
                     RangeSelector.Create(player, function(player, cube, dimension)
-                        MEM[xuid].keepingTitle = {_Tr('title.selectland.complete1'),
+                        MEM[xuid].keepingTitle = { _Tr('title.selectland.complete1'),
                                                   _Tr('title.selectland.complete2', '<a>',
-                            cfg.features.selection.tool_name, '<b>', 'land ok')}
+                                cfg.features.selection.tool_name, '<b>', 'land ok') }
                         MEM[xuid].reselectLand.range = cube
                         MEM[xuid].reselectLand.dimension = dimension
                     end)
@@ -2786,7 +2776,6 @@ OpenGUI = {
 ItemSelector = {
     _perpage = 20,
     Create = function(player, payload)
-
         --[[ Payload:
 			- (string)		title
 			- (string)		tip_usage
@@ -2799,7 +2788,7 @@ ItemSelector = {
             local pages = {}
             local allpair = {}
             for n, item in pairs(payload.list) do
-                allpair[#allpair + 1] = {n, item}
+                allpair[#allpair + 1] = { n, item }
             end
             for n, pair in pairs(allpair) do
                 local pn = math.ceil(n / ItemSelector._perpage)
@@ -2822,11 +2811,9 @@ ItemSelector = {
         }
 
         ItemSelector.Callback(player, '#')
-
     end,
 
     Callback = function(player, res)
-
         --[[ Result(res):
 			- [1]	(string)		filter
 			- [...]	(boolean)		...
@@ -2867,7 +2854,6 @@ ItemSelector = {
 
         -- Parse result if NOT_FIRST.
         if type(res) == 'table' then
-
             -- Update page if changed.
             local nowPage = res[#res] + 1
             if nowPage ~= runtime.page_num and nowPage <= pageCount then
@@ -2909,7 +2895,6 @@ ItemSelector = {
                 MEM[xuid].isr = nil
                 return
             end
-
         end
         ::JUMPOUT_ISR_PARSE::
 
@@ -2942,9 +2927,9 @@ RangeSelector = {
             dimension = '',
             cbfunc = callback
         }
-        MEM[xuid].keepingTitle = {_Tr('title.rangeselector.inmode'),
+        MEM[xuid].keepingTitle = { _Tr('title.rangeselector.inmode'),
                                   _Tr('title.rangeselector.selectpoint', '<a>', cfg.features.selection.tool_name, '<b>',
-            'A')}
+                'A') }
         RangeSelector.Push(player)
     end,
     Push = function(player, pos)
@@ -3055,7 +3040,7 @@ RangeSelector = {
             else
                 local chkIgnores = {}
                 if MEM[xuid].reselectLand then
-                    chkIgnores = {MEM[xuid].reselectLand.id}
+                    chkIgnores = { MEM[xuid].reselectLand.id }
                 end
                 local chkColl = Land.Util.IsCollision(range, chkIgnores)
                 if chkColl.status then
@@ -3098,7 +3083,6 @@ RangeSelector = {
             end
             mem.cbfunc(player, range, mem.dimension)
             mem.step = 5
-
         elseif mem.step == 5 then
             -- what the fxxk handle...
             if MEM[xuid].newLand then
@@ -3154,18 +3138,18 @@ SafeTeleport = {
                 return
             end
             if player:getAbilities().flying == 1 then
-                SendTitle(player, _Tr('talk.pleasewait'), _Tr('api.safetp.tping.disablefly'), {0, 5, 0})
+                SendTitle(player, _Tr('talk.pleasewait'), _Tr('api.safetp.tping.disablefly'), { 0, 5, 0 })
                 local nbt = player:getNbt()
                 nbt:getTag("abilities"):getTag("flying"):set(0)
                 player:setNbt(nbt)
                 return
             end
             if plpos.y >= def_height and not chunk_loaded then
-                SendTitle(player, _Tr('talk.pleasewait'), _Tr('api.safetp.tping.chunkloading'), {0, 15, 15})
+                SendTitle(player, _Tr('talk.pleasewait'), _Tr('api.safetp.tping.chunkloading'), { 0, 15, 15 })
             else
                 chunk_loaded = true
                 locked = true
-                SendTitle(player, _Tr('talk.pleasewait'), _Tr('api.safetp.tping.foundfoothold'), {0, 15, 15})
+                SendTitle(player, _Tr('talk.pleasewait'), _Tr('api.safetp.tping.foundfoothold'), { 0, 15, 15 })
                 local bl_type_list = {}
                 local footholds = {}
                 local range = Dimension.Get(dimid)
@@ -3173,7 +3157,7 @@ SafeTeleport = {
                     local bl = mc.getBlock(pos.x, i, pos.z, dimid)
                     bl_type_list[i] = bl.type
                 end
-                local ct_block = {'minecraft:air', 'minecraft:lava', 'minecraft:flowing_lava'}
+                local ct_block = { 'minecraft:air', 'minecraft:lava', 'minecraft:flowing_lava' }
                 for i, type in pairs(bl_type_list) do
                     if not Array.Fetch(ct_block, type) and bl_type_list[i + 1] == ct_block[1] and bl_type_list[i + 2] ==
                         ct_block[1] then
@@ -3395,7 +3379,7 @@ Pos = {
         return rtn
     end,
     ToArray = function(pos)
-        local rtn = {pos.x, pos.y, pos.z}
+        local rtn = { pos.x, pos.y, pos.z }
         if pos.dimid then
             rtn[4] = pos.dimid
         end
@@ -3501,8 +3485,8 @@ Array = {
 
 EventSystem = {
 
-    _ev = {'onAskLicense', 'onCreate', 'onDelete', 'onEnter', 'onLeave', 'onChangeRange', 'onChangeOwner',
-           'onChangeDescribe', 'onChangeName', 'onChangeTrust', 'onChangeSetting', 'onChangePermission'},
+    _ev = { 'onAskLicense', 'onCreate', 'onDelete', 'onEnter', 'onLeave', 'onChangeRange', 'onChangeOwner',
+        'onChangeDescribe', 'onChangeName', 'onChangeTrust', 'onChangeSetting', 'onChangePermission' },
     _cb = {},
     Init = function()
         EventSystem._ev_int = {}
@@ -3597,7 +3581,7 @@ Callback = {
                 local landId = Land.Query.Pos(player.blockPos)
                 if not landId then
                     if MEM[xuid].inland ~= 'null' then
-                        EventSystem.Call(EventSystem._ev_int['onLeave'], 'After', {landId, xuid})
+                        EventSystem.Call(EventSystem._ev_int['onLeave'], 'After', { landId, xuid })
                     end
                     MEM[xuid].inland = 'null'
                     goto JUMPOUT_LANDSIGN
@@ -3605,7 +3589,7 @@ Callback = {
                 if landId == MEM[xuid].inland then
                     goto JUMPOUT_LANDSIGN
                 else
-                    EventSystem.Call(EventSystem._ev_int['onEnter'], 'After', {landId, xuid})
+                    EventSystem.Call(EventSystem._ev_int['onEnter'], 'After', { landId, xuid })
                 end
 
                 local ownerXuid = Land.RelationShip.Owner.getXuid(landId)
@@ -3700,9 +3684,9 @@ Callback = {
                 if res.keepingTitle then -- Keeping Title
                     local title = res.keepingTitle
                     if type(title) == 'table' then
-                        SendTitle(mc.getPlayer(xuid), title[1], title[2], {0, 40, 20})
+                        SendTitle(mc.getPlayer(xuid), title[1], title[2], { 0, 40, 20 })
                     else
-                        SendTitle(mc.getPlayer(xuid), title, {0, 100, 0})
+                        SendTitle(mc.getPlayer(xuid), title, { 0, 100, 0 })
                     end
                 end
             end
@@ -3729,7 +3713,6 @@ Callback = {
     },
     Event = {
         onExplode = function(source, pos, radius, range, isDestroy, isFire)
-
             if not Map.Listener.check('onExplode') then
                 return
             end
@@ -3749,7 +3732,6 @@ Callback = {
                     return false
                 end
             end
-
         end
     }
 }
@@ -3781,7 +3763,7 @@ end
 function string.gsubEx(key, ...)
     local tWd = false
     local result = key
-    local args = {...}
+    local args = { ... }
 
     for n, word in pairs(args) do
         if tWd then
@@ -3862,7 +3844,6 @@ function table.getAllPaths(tab, ExpandArray, UnNeedThisPrefix)
 end
 
 function table.getKey(tab, path)
-
     --[[
 		What is "path"?
 		[A] the_table: {a=2,b=7,n=42,ok={pap=626}}
@@ -3891,11 +3872,9 @@ function table.getKey(tab, path)
     end
 
     return table.getKey(lta, table.concat(pathes, '.', 2, #pathes))
-
 end
 
 function table.setKey(tab, path, value)
-
     if string.sub(path, 1, 5) == 'this.' then
         path = string.sub(path, 6)
     end
@@ -3916,7 +3895,6 @@ function table.setKey(tab, path, value)
     end
 
     table.setKey(tab[pathes[1]], table.concat(pathes, '.', 2, #pathes), value)
-
 end
 
 function table.concatEx(origin, tbl)
@@ -3942,7 +3920,6 @@ function Plugin.Unload()
 end
 
 function Plugin.Upgrade(rawInfo)
-
     --[[
 		The directory structure for server:
 		# source = .../iLand/{numver}/...
@@ -4047,7 +4024,6 @@ function Plugin.Upgrade(rawInfo)
     end
 
     INFO('AutoUpdate', _Tr('console.autoupdate.success'))
-
 end
 
 function Plugin.Reload()
@@ -4061,15 +4037,17 @@ function _Tr(a, ...)
     local rtn = I18N.LangPack.data[a] or a
     return string.gsubEx(rtn, ...)
 end
+
 function SendTitle(player, title, subtitle, times)
     local name = player.realName
-    times = times or {20, 25, 20}
+    times = times or { 20, 25, 20 }
     mc.runcmdEx('titleraw "' .. name .. '" times ' .. times[1] .. ' ' .. times[2] .. ' ' .. times[3])
     if subtitle then
         mc.runcmdEx('titleraw "' .. name .. '" subtitle {"rawtext": [{"text":"' .. subtitle .. '"}]}')
     end
     mc.runcmdEx('titleraw "' .. name .. '" title {"rawtext": [{"text":"' .. title .. '"}]}')
 end
+
 function SendText(player, text, mode)
     -- [mode] 0 = FORCE USE TALK
     if not mode and not cfg.features.force_talk then
@@ -4085,6 +4063,7 @@ function SendText(player, text, mode)
         return
     end
 end
+
 function CalculatePrice(cubeInfo, dimension)
     local ecode
     if dimension == '3D' then
@@ -4100,6 +4079,7 @@ function CalculatePrice(cubeInfo, dimension)
     end
     return math.floor(price * (cfg.land.bought.discount))
 end
+
 function EntityGetType(type)
     if type == 'minecraft:player' then
         return 0
@@ -4112,6 +4092,7 @@ function EntityGetType(type)
     end
     return 0
 end
+
 function GetPlayerList(mode, IncAll)
     --[[ mode
 		<0> xuid list.
@@ -4153,6 +4134,7 @@ function GetPlayerList(mode, IncAll)
     end
     return rtn
 end
+
 local function try(func)
     local stat, res = pcall(func[1])
     if not stat then
@@ -4165,7 +4147,6 @@ local function catch(err)
 end
 
 function RegisterCommands()
-
     -- [Client] Command Registry.
 
     mc.regPlayerCmd('land', _Tr('command.land'), function(player, args)
@@ -4203,7 +4184,7 @@ function RegisterCommands()
     end)
     mc.regPlayerCmd('land new', _Tr('command.land_new'), function(player, args)
         local xuid = player.xuid
-        if not EventSystem.Call(EventSystem._ev_int['onAskLicense'], 'Before', {xuid}) then
+        if not EventSystem.Call(EventSystem._ev_int['onAskLicense'], 'Before', { xuid }) then
             return
         end
         if MEM[xuid].reselectLand then
@@ -4216,9 +4197,9 @@ function RegisterCommands()
         else
             MEM[xuid].newLand = {}
             RangeSelector.Create(player, function(player, cube, dimension)
-                MEM[xuid].keepingTitle = {_Tr('title.selectland.complete1'),
+                MEM[xuid].keepingTitle = { _Tr('title.selectland.complete1'),
                                           _Tr('title.selectland.complete2', '<a>', cfg.features.selection.tool_name,
-                    '<b>', 'land buy')}
+                        '<b>', 'land buy') }
                 MEM[xuid].newLand.range = cube
                 MEM[xuid].newLand.dimension = dimension
             end)
@@ -4436,8 +4417,8 @@ function RegisterCommands()
             SendText(player, _Tr('title.landtp.fail.notowner'))
             return false
         end
-        DataStorage.Land.Raw[landId].settings.teleport = {pos.x, pos.y + 1, pos.z}
-        DataStorage.Save({0, 1, 0})
+        DataStorage.Land.Raw[landId].settings.teleport = { pos.x, pos.y + 1, pos.z }
+        DataStorage.Save({ 0, 1, 0 })
         player:sendModalForm(_Tr('gui.general.complete'), _Tr('gui.landtp.point', '<a>', Pos.ToString({
             x = pos.x,
             y = pos.y + 1,
@@ -4463,7 +4444,7 @@ function RegisterCommands()
             return false
         end
         local def = Map.Land.Position.data[landId].posA
-        DataStorage.Land.Raw[landId].settings.teleport = {def.x, def.y + 1, def.z}
+        DataStorage.Land.Raw[landId].settings.teleport = { def.x, def.y + 1, def.z }
         SendText(player, _Tr('title.landtp.removed'))
     end)
 
@@ -4584,13 +4565,11 @@ function RegisterCommands()
     end)
 
     return true
-
 end
 
 -- Minecraft Eventing.
 
 mc.listen('onPreJoin', function(player)
-
     --- Check for xbox-auth.
     if player.xuid == '' then
         player:kick(_Tr('talk.prejoin.noxuid'))
@@ -4616,10 +4595,8 @@ mc.listen('onPreJoin', function(player)
     if not cfg.features.disable_creative_warn and player.gameMode == 1 then
         WARN(_Tr('talk.gametype.creative', '<a>', player.realName))
     end
-
 end)
 mc.listen('onLeft', function(player)
-
     local xuid = player.xuid
     if not MEM[xuid] then
         return
@@ -4629,10 +4606,8 @@ mc.listen('onLeft', function(player)
         end
         MEM[xuid] = nil
     end
-
 end)
 mc.listen('onDestroyBlock', function(player, block)
-
     if not Map.Listener.check('onDestroyBlock') then
         return
     end
@@ -4646,7 +4621,7 @@ mc.listen('onDestroyBlock', function(player, block)
         end -- fix crash
         SendText(player, _Tr('title.oplandmgr.setsuccess', '<a>', HandItem.name))
         cfg.features.selection.tool_type = HandItem.type
-        DataStorage.Save({1, 0, 0})
+        DataStorage.Save({ 1, 0, 0 })
         MEM[xuid].selectool = -1
         return false
     end
@@ -4668,7 +4643,6 @@ mc.listen('onDestroyBlock', function(player, block)
     return false
 end)
 mc.listen('onPlaceBlock', function(player, block)
-
     if not Map.Listener.check('onPlaceBlock') then
         return
     end
@@ -4690,7 +4664,6 @@ mc.listen('onPlaceBlock', function(player, block)
     return false
 end)
 mc.listen('onUseItemOn', function(player, item, block)
-
     if not Map.Listener.check('onUseItemOn') then
         return
     end
@@ -4711,7 +4684,6 @@ mc.listen('onUseItemOn', function(player, item, block)
     end
 
     if landId then
-
         if Land.Util.CheckPerm(landId, xuid) then
             return
         end
@@ -4803,9 +4775,7 @@ mc.listen('onUseItemOn', function(player, item, block)
         end
         SendText(player, _Tr('title.landlimit.noperm'))
         return false
-
     else
-
         if IsConPlus then
             if string.sub(it, -6, -1) == 'bucket' then
                 local r = 7
@@ -4824,12 +4794,9 @@ mc.listen('onUseItemOn', function(player, item, block)
             end
         end
         return
-
     end
-
 end)
 mc.listen('onAttackBlock', function(player, block, item)
-
     if not Map.Listener.check('onAttackBlock') then
         return
     end
@@ -4855,10 +4822,8 @@ mc.listen('onAttackBlock', function(player, block, item)
 
     SendText(player, _Tr('title.landlimit.noperm'))
     return false
-
 end)
 mc.listen('onAttackEntity', function(player, entity)
-
     if not Map.Listener.check('onAttackEntity') then
         return
     end
@@ -4899,7 +4864,6 @@ mc.listen('onAttackEntity', function(player, entity)
     return false
 end)
 mc.listen('onChangeArmorStand', function(entity, player, slot)
-
     if not Map.Listener.check('onChangeArmorStand') then
         return
     end
@@ -4921,7 +4885,6 @@ mc.listen('onChangeArmorStand', function(entity, player, slot)
     return false
 end)
 mc.listen('onTakeItem', function(player, entity)
-
     if not Map.Listener.check('onTakeItem') then
         return
     end
@@ -4943,7 +4906,6 @@ mc.listen('onTakeItem', function(player, entity)
     return false
 end)
 mc.listen('onDropItem', function(player, item)
-
     if not Map.Listener.check('onDropItem') then
         return
     end
@@ -4965,7 +4927,6 @@ mc.listen('onDropItem', function(player, item)
     return false
 end)
 mc.listen('onBlockInteracted', function(player, block)
-
     if not Map.Listener.check('onBlockInteracted') then
         return
     end
@@ -5038,7 +4999,6 @@ mc.listen('onBlockInteracted', function(player, block)
     return false
 end)
 mc.listen('onUseFrameBlock', function(player, block)
-
     if not Map.Listener.check('onUseFrameBlock') then
         return
     end
@@ -5060,7 +5020,6 @@ mc.listen('onUseFrameBlock', function(player, block)
     return false
 end)
 mc.listen('onSpawnProjectile', function(splasher, entype)
-
     if not Map.Listener.check('onSpawnProjectile') or not splasher:isPlayer() then
         return
     end
@@ -5110,7 +5069,6 @@ mc.listen('onSpawnProjectile', function(splasher, entype)
     return false
 end)
 mc.listen('onMobHurt', function(mob, source, damage)
-
     if not Map.Listener.check('onMobHurt') or not source or not source:isPlayer() then
         return
     end
@@ -5140,7 +5098,6 @@ mc.listen('onMobHurt', function(mob, source, damage)
     return false
 end)
 mc.listen('onStepOnPressurePlate', function(entity, block)
-
     if not Map.Listener.check('onStepOnPressurePlate') then
         return
     end
@@ -5170,7 +5127,6 @@ mc.listen('onStepOnPressurePlate', function(entity, block)
     return false
 end)
 mc.listen('onRide', function(rider, entity)
-
     if not Map.Listener.check('onRide') then
         return
     end
@@ -5205,7 +5161,6 @@ mc.listen('onRide', function(rider, entity)
     return false
 end)
 mc.listen('onWitherBossDestroy', function(entity, posA, posB)
-
     if not Map.Listener.check('onWitherBossDestroy') then
         return
     end
@@ -5219,7 +5174,6 @@ mc.listen('onWitherBossDestroy', function(entity, posA, posB)
     return true
 end)
 mc.listen('onFarmLandDecay', function(posn, entity)
-
     if not Map.Listener.check('onFarmLandDecay') then
         return
     end
@@ -5240,7 +5194,6 @@ mc.listen('onFarmLandDecay', function(posn, entity)
     return false
 end)
 mc.listen('onPistonTryPush', function(pos, block)
-
     if not Map.Listener.check('onPistonTryPush') then
         return
     end
@@ -5251,10 +5204,8 @@ mc.listen('onPistonTryPush', function(pos, block)
         Id_bePushedBlock then
         return false
     end
-
 end)
 mc.listen('onFireSpread', function(pos)
-
     if not Map.Listener.check('onFireSpread') then
         return
     end
@@ -5269,7 +5220,6 @@ mc.listen('onFireSpread', function(pos)
     return false
 end)
 mc.listen('onEat', function(player, item)
-
     if not Map.Listener.check('onEat') then
         return
     end
@@ -5291,7 +5241,6 @@ mc.listen('onEat', function(player, item)
     return false
 end)
 mc.listen('onRedStoneUpdate', function(block, level, isActive)
-
     if not Map.Listener.check('onRedStoneUpdate') then
         return
     end
@@ -5309,10 +5258,8 @@ mc.listen('onRedStoneUpdate', function(block, level, isActive)
             return false
         end
     end
-
 end)
 mc.listen('onStartDestroyBlock', function(player, block)
-
     local xuid = player.xuid
     if MEM[xuid].rsr and (not MEM[xuid].rsr.sleep or MEM[xuid].rsr.sleep < os.time()) then
         local HandItem = player:getHand()
@@ -5322,7 +5269,6 @@ mc.listen('onStartDestroyBlock', function(player, block)
         RangeSelector.Push(player, block.pos)
         MEM[xuid].rsr.sleep = os.time() + 2
     end
-
 end)
 mc.listen('onConsoleCmd', function(cmd)
     local m = string.split(cmd, ' ')
@@ -5331,9 +5277,8 @@ mc.listen('onConsoleCmd', function(cmd)
     end
 end)
 mc.listen('onServerStarted', function()
-
     -- load owners data
-    try {function()
+    try { function()
         -- DO NOT CHANGE THE LOAD ORDER.
         assert(I18N.Init(), 'Error loading I18N!')
         assert(DataStorage.Config.Load(), _Tr('console.loading.fail.config'))
@@ -5342,11 +5287,11 @@ mc.listen('onServerStarted', function()
         assert(Economy.Protocol.set(cfg.economic.protocol), _Tr('console.loading.fail.economy'))
         assert(Map.Init(), _Tr('console.loading.fail.maps'))
         assert(RegisterCommands(), _Tr('console.loading.fail.regcmd'))
-    end, catch {function(msg)
+    end, catch { function(msg)
         WARN(msg)
         WARN('Plugin closed.')
         Plugin.Unload()
-    end}}
+    end } }
 
     -- Make timer
     if cfg.features.landsign.enable then
@@ -5406,7 +5351,6 @@ mc.listen('onServerStarted', function()
                         INFO('Announcement', n .. '. ' .. content)
                     end
                 end
-
             end)
         else
             WARN(_Tr('console.getonline.failed'))
@@ -5420,7 +5364,6 @@ mc.listen('onServerStarted', function()
             collectgarbage("collect")
         end
     end, 1000 * 60)
-
 end)
 mc.listen('onBlockExplode', Callback.Event.onExplode)
 mc.listen('onEntityExplode', Callback.Event.onExplode)
@@ -5458,7 +5401,7 @@ mc.listen("onOpenContainer", function(pl, bl)
     end
 end)
 
--- 使用物品时
+-- 使用物品时 (点击方块)
 mc.listen("onUseItemOn", function(pl, item, bl, side, pos)
     local landId = Land.Query.Pos(bl.pos)
     if landId == -1 then
