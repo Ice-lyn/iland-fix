@@ -1,0 +1,16 @@
+{
+    "entry": "iland.lua",
+    "name": "iland",
+    "type": "lse-lua",
+    "description": "iland GMLIB数据库版本",
+    "author": "铭记mingji",
+    "version": "1.0.0",
+    "dependencies": [
+        {
+            "name": "legacy-script-engine-lua"
+        },
+        {
+            "name": "GMLIB-LegacyRemoteCallApi"
+        }
+    ]
+}
