@@ -1099,6 +1099,7 @@ DataStorage = {
                     use_button = false,
                     use_respawn_anchor = false,
                     use_item_frame = false,
+                    use_display_shelf = false, -- 允许使用物品展示架
                     use_fishing_hook = false,
                     use_bucket = false,
                     use_pressure_plate = false,
@@ -2510,6 +2511,7 @@ OpenGUI = {
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.composter'), perm.use_composter)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.bed'), perm.use_bed)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.item_frame'), perm.use_item_frame)
+            Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.display_shelf'), perm.use_display_shelf)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.daylight_detector'), perm.use_daylight_detector)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.lever'), perm.use_lever)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.button'), perm.use_button)
@@ -2582,6 +2584,7 @@ OpenGUI = {
                 perm.use_composter = get()
                 perm.use_bed = get()
                 perm.use_item_frame = get()
+                perm.use_display_shelf = get()
                 perm.use_daylight_detector = get()
                 perm.use_lever = get()
                 perm.use_button = get()
@@ -4689,6 +4692,8 @@ mc.listen('onUseItemOn', function(player, item, block)
         special_perm = 'allow_edit_sign' -- 告示牌
     elseif bn == 'minecraft:flower_pot' then
         special_perm = 'allow_place' -- 花盆
+    elseif string.find(bn, '_frame') then
+        special_perm = 'use_display_shelf' -- 物品展示架
     elseif string.find(bn, 'shulker') then
         special_perm = 'use_shulker_box' -- 潜影盒
     elseif it == 'minecraft:bone_meal' then
