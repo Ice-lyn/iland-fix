@@ -391,6 +391,10 @@ Map = {
         data = {},
         build = function()
             Map.Listener.data = Array.ToKeyMap(cfg.features.disabled_listener)
+            -- 给旧版 config.json 补上新增的监听器项，保持结构一致
+            if not Array.Fetch(cfg.features.disabled_listener, 'onPlayerInteractEntity') then
+                cfg.features.disabled_listener[#cfg.features.disabled_listener + 1] = 'onPlayerInteractEntity'
+            end
         end,
         check = function(listener)
             return Map.Listener.data[listener] == nil
@@ -402,68 +406,68 @@ Map = {
             Map.Control.data = {
                 -- # UseItem
                 [0] = Array.ToKeyMap({ 'minecraft:bed', 'minecraft:chest', 'minecraft:trapped_chest',
-                                      'minecraft:crafting_table', 'minecraft:campfire', 'minecraft:soul_campfire',
-                                      'minecraft:composter', 'minecraft:undyed_shulker_box', 'minecraft:shulker_box',
-                                      'minecraft:noteblock', 'minecraft:jukebox', 'minecraft:bell',
-                                      'minecraft:daylight_detector_inverted', 'minecraft:daylight_detector',
-                                      'minecraft:lectern', 'minecraft:cauldron', 'minecraft:lever',
-                                      'minecraft:stone_button', 'minecraft:wooden_button', 'minecraft:spruce_button',
-                                      'minecraft:birch_button', 'minecraft:jungle_button', 'minecraft:acacia_button',
-                                      'minecraft:dark_oak_button', 'minecraft:crimson_button',
-                                      'minecraft:warped_button', 'minecraft:polished_blackstone_button',
-                                      'minecraft:respawn_anchor', 'minecraft:trapdoor', 'minecraft:spruce_trapdoor',
-                                      'minecraft:birch_trapdoor', 'minecraft:jungle_trapdoor',
-                                      'minecraft:acacia_trapdoor', 'minecraft:dark_oak_trapdoor',
-                                      'minecraft:crimson_trapdoor', 'minecraft:warped_trapdoor', 'minecraft:fence_gate',
-                                      'minecraft:spruce_fence_gate', 'minecraft:birch_fence_gate',
-                                      'minecraft:jungle_fence_gate', 'minecraft:acacia_fence_gate',
-                                      'minecraft:dark_oak_fence_gate', 'minecraft:crimson_fence_gate',
-                                      'minecraft:warped_fence_gate', 'minecraft:wooden_door', 'minecraft:spruce_door',
-                                      'minecraft:birch_door', 'minecraft:jungle_door', 'minecraft:acacia_door',
-                                      'minecraft:dark_oak_door', 'minecraft:crimson_door', 'minecraft:warped_door',
+                    'minecraft:crafting_table', 'minecraft:campfire', 'minecraft:soul_campfire',
+                    'minecraft:composter', 'minecraft:undyed_shulker_box', 'minecraft:shulker_box',
+                    'minecraft:noteblock', 'minecraft:jukebox', 'minecraft:bell',
+                    'minecraft:daylight_detector_inverted', 'minecraft:daylight_detector',
+                    'minecraft:lectern', 'minecraft:cauldron', 'minecraft:lever',
+                    'minecraft:stone_button', 'minecraft:wooden_button', 'minecraft:spruce_button',
+                    'minecraft:birch_button', 'minecraft:jungle_button', 'minecraft:acacia_button',
+                    'minecraft:dark_oak_button', 'minecraft:crimson_button',
+                    'minecraft:warped_button', 'minecraft:polished_blackstone_button',
+                    'minecraft:respawn_anchor', 'minecraft:trapdoor', 'minecraft:spruce_trapdoor',
+                    'minecraft:birch_trapdoor', 'minecraft:jungle_trapdoor',
+                    'minecraft:acacia_trapdoor', 'minecraft:dark_oak_trapdoor',
+                    'minecraft:crimson_trapdoor', 'minecraft:warped_trapdoor', 'minecraft:fence_gate',
+                    'minecraft:spruce_fence_gate', 'minecraft:birch_fence_gate',
+                    'minecraft:jungle_fence_gate', 'minecraft:acacia_fence_gate',
+                    'minecraft:dark_oak_fence_gate', 'minecraft:crimson_fence_gate',
+                    'minecraft:warped_fence_gate', 'minecraft:wooden_door', 'minecraft:spruce_door',
+                    'minecraft:birch_door', 'minecraft:jungle_door', 'minecraft:acacia_door',
+                    'minecraft:dark_oak_door', 'minecraft:crimson_door', 'minecraft:warped_door',
                     'minecraft:dragon_egg' }),
                 -- # onBlockInteracted
                 [1] = Array.ToKeyMap({ 'minecraft:cartography_table', 'minecraft:smithing_table', 'minecraft:furnace',
-                                      'minecraft:blast_furnace', 'minecraft:smoker', 'minecraft:brewing_stand',
-                                      'minecraft:anvil', 'minecraft:grindstone', 'minecraft:enchanting_table',
-                                      'minecraft:barrel', 'minecraft:beacon', 'minecraft:hopper', 'minecraft:dropper',
-                                      'minecraft:dispenser', 'minecraft:loom', 'minecraft:stonecutter_block',
+                    'minecraft:blast_furnace', 'minecraft:smoker', 'minecraft:brewing_stand',
+                    'minecraft:anvil', 'minecraft:grindstone', 'minecraft:enchanting_table',
+                    'minecraft:barrel', 'minecraft:beacon', 'minecraft:hopper', 'minecraft:dropper',
+                    'minecraft:dispenser', 'minecraft:loom', 'minecraft:stonecutter_block',
                     'minecraft:lit_furnace', 'minecraft:lit_blast_furnace', 'minecraft:lit_smoker' }),
                 -- # ItemWhiteList
                 [2] = Array.ToKeyMap({ 'minecraft:glow_ink_sac', 'minecraft:end_crystal', 'minecraft:ender_eye',
-                                      'minecraft:axolotl_bucket', 'minecraft:powder_snow_bucket',
-                                      'minecraft:pufferfish_bucket', 'minecraft:tropical_fish_bucket',
-                                      'minecraft:salmon_bucket', 'minecraft:cod_bucket', 'minecraft:water_bucket',
-                                      'minecraft:cod_bucket', 'minecraft:lava_bucket', 'minecraft:bucket',
-                                      'minecraft:flint_and_steel', 'minecraft:skull', 'minecraft:wooden_axe',
-                                      'minecraft:stone_axe', 'minecraft:iron_axe', 'minecraft:golden_axe',
+                    'minecraft:axolotl_bucket', 'minecraft:powder_snow_bucket',
+                    'minecraft:pufferfish_bucket', 'minecraft:tropical_fish_bucket',
+                    'minecraft:salmon_bucket', 'minecraft:cod_bucket', 'minecraft:water_bucket',
+                    'minecraft:cod_bucket', 'minecraft:lava_bucket', 'minecraft:bucket',
+                    'minecraft:flint_and_steel', 'minecraft:skull', 'minecraft:wooden_axe',
+                    'minecraft:stone_axe', 'minecraft:iron_axe', 'minecraft:golden_axe',
                     'minecraft:diamond_axe', 'minecraft:netherite_axe', 'minecraft:banner' }),
                 -- # Special attack.
                 [3] = Array.ToKeyMap({ 'minecraft:ender_crystal', 'minecraft:armor_stand' }),
                 -- # EntityTypeList
                 [4] = {
                     animals = Array.ToKeyMap({ 'minecraft:axolotl', 'minecraft:bat', 'minecraft:cat',
-                                              'minecraft:chicken', 'minecraft:cod', 'minecraft:cow', 'minecraft:donkey',
-                                              'minecraft:fox', 'minecraft:glow_squid', 'minecraft:horse',
-                                              'minecraft:mooshroom', 'minecraft:mule', 'minecraft:ocelot',
-                                              'minecraft:parrot', 'minecraft:pig', 'minecraft:rabbit',
-                                              'minecraft:salmon', 'minecraft:snow_golem', 'minecraft:sheep',
-                                              'minecraft:skeleton_horse', 'minecraft:squid', 'minecraft:strider',
-                                              'minecraft:tropical_fish', 'minecraft:turtle', 'minecraft:villager_v2',
-                                              'minecraft:wandering_trader', 'minecraft:npc'}),
+                        'minecraft:chicken', 'minecraft:cod', 'minecraft:cow', 'minecraft:donkey',
+                        'minecraft:fox', 'minecraft:glow_squid', 'minecraft:horse',
+                        'minecraft:mooshroom', 'minecraft:mule', 'minecraft:ocelot',
+                        'minecraft:parrot', 'minecraft:pig', 'minecraft:rabbit',
+                        'minecraft:salmon', 'minecraft:snow_golem', 'minecraft:sheep',
+                        'minecraft:skeleton_horse', 'minecraft:squid', 'minecraft:strider',
+                        'minecraft:tropical_fish', 'minecraft:turtle', 'minecraft:villager_v2',
+                        'minecraft:wandering_trader', 'minecraft:npc' }),
                     mobs = Array.ToKeyMap({ -- type A
-                    'minecraft:pufferfish', 'minecraft:bee', 'minecraft:dolphin', 'minecraft:goat',
-                    'minecraft:iron_golem', 'minecraft:llama', 'minecraft:llama_spit', 'minecraft:wolf',
-                    'minecraft:panda', 'minecraft:polar_bear', 'minecraft:enderman', 'minecraft:piglin',
-                    'minecraft:spider', 'minecraft:cave_spider', 'minecraft:zombie_pigman', -- type B
-                    'minecraft:blaze', 'minecraft:small_fireball', 'minecraft:creeper', 'minecraft:drowned',
-                    'minecraft:elder_guardian', 'minecraft:endermite', 'minecraft:evocation_illager',
-                    'minecraft:evocation_fang', 'minecraft:ghast', 'minecraft:fireball', 'minecraft:guardian',
-                    'minecraft:hoglin', 'minecraft:husk', 'minecraft:magma_cube', 'minecraft:phantom',
-                    'minecraft:pillager', 'minecraft:ravager', 'minecraft:shulker', 'minecraft:shulker_bullet',
-                    'minecraft:silverfish', 'minecraft:skeleton', 'minecraft:skeleton_horse', 'minecraft:slime',
-                    'minecraft:vex', 'minecraft:vindicator', 'minecraft:witch', 'minecraft:wither_skeleton',
-                    'minecraft:zoglin', 'minecraft:zombie', 'minecraft:zombie_villager_v2', 'minecraft:piglin_brute',
+                        'minecraft:pufferfish', 'minecraft:bee', 'minecraft:dolphin', 'minecraft:goat',
+                        'minecraft:iron_golem', 'minecraft:llama', 'minecraft:llama_spit', 'minecraft:wolf',
+                        'minecraft:panda', 'minecraft:polar_bear', 'minecraft:enderman', 'minecraft:piglin',
+                        'minecraft:spider', 'minecraft:cave_spider', 'minecraft:zombie_pigman', -- type B
+                        'minecraft:blaze', 'minecraft:small_fireball', 'minecraft:creeper', 'minecraft:drowned',
+                        'minecraft:elder_guardian', 'minecraft:endermite', 'minecraft:evocation_illager',
+                        'minecraft:evocation_fang', 'minecraft:ghast', 'minecraft:fireball', 'minecraft:guardian',
+                        'minecraft:hoglin', 'minecraft:husk', 'minecraft:magma_cube', 'minecraft:phantom',
+                        'minecraft:pillager', 'minecraft:ravager', 'minecraft:shulker', 'minecraft:shulker_bullet',
+                        'minecraft:silverfish', 'minecraft:skeleton', 'minecraft:skeleton_horse', 'minecraft:slime',
+                        'minecraft:vex', 'minecraft:vindicator', 'minecraft:witch', 'minecraft:wither_skeleton',
+                        'minecraft:zoglin', 'minecraft:zombie', 'minecraft:zombie_villager_v2', 'minecraft:piglin_brute',
                         'minecraft:ender_dragon', 'minecraft:dragon_fireball', 'minecraft:wither',
                         'minecraft:wither_skull',
                         'minecraft:wither_skull_dangerous' })
@@ -564,7 +568,7 @@ Map = {
                 }
                 for n, landId in pairs(lands) do
                     map.recorded_landId[landId][#map.recorded_landId[landId] + 1] = "this." .. cubestr ..
-                                                                                        ".landlist.(*)" .. n
+                        ".landlist.(*)" .. n
                 end
             end,
             get = function(AABB)
@@ -1402,7 +1406,7 @@ Land = {
         Nickname = {
             isDefault = function(landId)
                 return DataStorage.Land.Raw[landId].settings.nickname ==
-                           DataStorage.Land.Template['data'].settings.nickname
+                    DataStorage.Land.Template['data'].settings.nickname
             end,
             get = function(landId, rtnmode)
                 --[[ Return Mode (If name default).
@@ -1525,7 +1529,7 @@ Land = {
 
         CheckPerm = function(landId, xuid)
             return Land.RelationShip.Operator.check(xuid) or Land.RelationShip.Owner.check(landId, xuid) or
-                       Land.RelationShip.Trusted.check(landId, xuid)
+                Land.RelationShip.Trusted.check(landId, xuid)
         end,
         GetDimension = function(landId)
             local range = Map.Land.Position.data[landId]
@@ -2724,7 +2728,7 @@ OpenGUI = {
                             Land.RelationShip.Owner.set(landId, targetXuid)
                             MEM[pl.xuid].BackToId = nil
                             pl:sendModalForm(_Tr('gui.general.complete'), _Tr('title.landtransfer.complete', '<a>',
-                                Land.Options.Nickname.get(landId, 3), '<b>', selected[1]), _Tr('gui.general.back'),
+                                    Land.Options.Nickname.get(landId, 3), '<b>', selected[1]), _Tr('gui.general.back'),
                                 _Tr('gui.general.close'), Callback.Form.BackTo.LandMgr)
                         end
                     })
@@ -2742,7 +2746,7 @@ OpenGUI = {
                     }
                     RangeSelector.Create(player, function(player, cube, dimension)
                         MEM[xuid].keepingTitle = { _Tr('title.selectland.complete1'),
-                                                  _Tr('title.selectland.complete2', '<a>',
+                            _Tr('title.selectland.complete2', '<a>',
                                 cfg.features.selection.tool_name, '<b>', 'land ok') }
                         MEM[xuid].reselectLand.range = cube
                         MEM[xuid].reselectLand.dimension = dimension
@@ -2928,7 +2932,7 @@ RangeSelector = {
             cbfunc = callback
         }
         MEM[xuid].keepingTitle = { _Tr('title.rangeselector.inmode'),
-                                  _Tr('title.rangeselector.selectpoint', '<a>', cfg.features.selection.tool_name, '<b>',
+            _Tr('title.rangeselector.selectpoint', '<a>', cfg.features.selection.tool_name, '<b>',
                 'A') }
         RangeSelector.Push(player)
     end,
@@ -3049,14 +3053,14 @@ RangeSelector = {
                         Cube.Create(Pos.Add(mem.posA, sp), Pos.Reduce(mem.posB, sp), dimid), chkIgnores)
                     if not chkNearby.status then
                         player:sendModalForm(_Tr('gui.rangecheck.title'), _Tr('gui.rangecheck.msg', '<a>', Land.Options
-                            .Nickname.get(chkNearby.id, 3), '<b>', chkNearby.info), _Tr('gui.general.iknow'),
+                                .Nickname.get(chkNearby.id, 3), '<b>', chkNearby.info), _Tr('gui.general.iknow'),
                             _Tr('gui.general.close'), Callback.Form.NULL)
                     else
                         passed = true
                     end
                 else
                     player:sendModalForm(_Tr('gui.rangecheck.title'), _Tr('gui.rangecheck.msg', '<a>',
-                        Land.Options.Nickname.get(chkColl.id, 3), '<b>', chkColl.info), _Tr('gui.general.iknow'),
+                            Land.Options.Nickname.get(chkColl.id, 3), '<b>', chkColl.info), _Tr('gui.general.iknow'),
                         _Tr('gui.general.close'), Callback.Form.NULL)
                 end
             end
@@ -3234,12 +3238,12 @@ Cube = {
     HadPos = function(pos, AABB)
         local posA, posB = AABB.posA, AABB.posB
         return (pos.x >= posA.x and pos.x <= posB.x) and (pos.y >= posA.y and pos.y <= posB.y) and
-                   (pos.z >= posA.z and pos.z <= posB.z)
+            (pos.z >= posA.z and pos.z <= posB.z)
     end,
     Collision = function(AABB_a, AABB_b)
         local a, b = AABB_a, AABB_b
         return (a.posA.x <= b.posB.x and a.posB.x >= b.posB.x) and (a.posA.y <= b.posB.y and a.posB.y >= b.posB.y) and
-                   (a.posA.z <= b.posB.z and a.posB.z >= b.posB.z);
+            (a.posA.z <= b.posB.z and a.posB.z >= b.posB.z);
     end,
     GetEdge = function(AABB)
         local edge = {}
@@ -4056,7 +4060,7 @@ function SendText(player, text, mode)
     end
     if cfg.features.force_talk and mode ~= 0 then
         player:sendText('§l§b———————————§a LAND §b———————————\n§r' ..
-                            text)
+            text)
     end
     if mode == 0 then
         player:sendText('§l§b[§a LAND §b] §r' .. text)
@@ -4198,7 +4202,7 @@ function RegisterCommands()
             MEM[xuid].newLand = {}
             RangeSelector.Create(player, function(player, cube, dimension)
                 MEM[xuid].keepingTitle = { _Tr('title.selectland.complete1'),
-                                          _Tr('title.selectland.complete2', '<a>', cfg.features.selection.tool_name,
+                    _Tr('title.selectland.complete2', '<a>', cfg.features.selection.tool_name,
                         '<b>', 'land buy') }
                 MEM[xuid].newLand.range = cube
                 MEM[xuid].newLand.dimension = dimension
@@ -4376,13 +4380,13 @@ function RegisterCommands()
         for i, landId in pairs(Land.RelationShip.Owner.getLand(xuid)) do
             local xpos = Land.Options.Teleport.get(landId)
             tplands[#tplands + 1] = Dimension.Get(xpos.dimid).name .. ' (' .. Pos.ToString(xpos) .. ') ' ..
-                                        Land.Options.Nickname.get(landId, 3)
+                Land.Options.Nickname.get(landId, 3)
             landlst[#landlst + 1] = landId
         end
         for i, landId in pairs(Land.RelationShip.Trusted.getLand(xuid)) do
             local xpos = Land.Options.Teleport.get(landId)
             tplands[#tplands + 1] = '§l' .. _Tr('gui.landtp.trusted') .. '§r ' .. Dimension.Get(xpos.dimid).name ..
-                                        '(' .. Pos.ToString(xpos) .. ') ' .. Land.Options.Nickname.get(landId, 3)
+                '(' .. Pos.ToString(xpos) .. ') ' .. Land.Options.Nickname.get(landId, 3)
             landlst[#landlst + 1] = landId
         end
         local Form = mc.newSimpleForm()
@@ -4420,10 +4424,10 @@ function RegisterCommands()
         DataStorage.Land.Raw[landId].settings.teleport = { pos.x, pos.y + 1, pos.z }
         DataStorage.Save({ 0, 1, 0 })
         player:sendModalForm(_Tr('gui.general.complete'), _Tr('gui.landtp.point', '<a>', Pos.ToString({
-            x = pos.x,
-            y = pos.y + 1,
-            z = pos.z
-        }), '<b>', Land.Options.Nickname.get(landId, 2)), _Tr('gui.general.iknow'), _Tr('gui.general.close'),
+                x = pos.x,
+                y = pos.y + 1,
+                z = pos.z
+            }), '<b>', Land.Options.Nickname.get(landId, 2)), _Tr('gui.general.iknow'), _Tr('gui.general.close'),
             Callback.Form.NULL)
     end)
     mc.regPlayerCmd('land tp rm', _Tr('command.land_tp_rm'), function(player, args)
