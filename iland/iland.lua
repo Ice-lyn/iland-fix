@@ -5394,9 +5394,11 @@ mc.listen("onOpenContainer", function(pl, bl)
     end
     local perm = DataStorage.Land.Raw[landId].permissions
     if string.find(bl.type, "shulker") and not perm.use_shulker_box then
+        SendText(pl, _Tr('title.landlimit.noperm'))
         return false
     end
     if bl.type == "minecraft:chest" and not perm.allow_open_chest then
+        SendText(pl, _Tr('title.landlimit.noperm'))
         return false
     end
 end)
@@ -5417,12 +5419,19 @@ mc.listen("onUseItemOn", function(pl, item, bl, side, pos)
         return
     end
     if bl.type == "minecraft:grass" then
+        SendText(pl, _Tr('title.landlimit.noperm'))
         return false
-    end -- 铲除修护
+    end
+
+    -- 告示牌修护
     if string.find(bl.type, "sign") then
+        SendText(pl, _Tr('title.landlimit.noperm'))
         return false
-    end -- 告示牌修护
+    end
+
+    -- 龙蛋传送修护
     if bl.type == "minecraft:dragon_egg" then
+        SendText(pl, _Tr('title.landlimit.noperm'))
         return false
     end -- 龙蛋传送修护
     if string.find(bl.type, "_log") or string.find(bl.type, "_stem") then
