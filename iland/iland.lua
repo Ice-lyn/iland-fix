@@ -1053,6 +1053,7 @@ DataStorage = {
                 permissions = {
                     allow_destroy = false,
                     allow_entity_destroy = false,
+                    allow_villager_interact = false,
                     allow_place = false,
                     allow_attack_player = false,
                     allow_attack_animal = false,
@@ -1060,6 +1061,8 @@ DataStorage = {
                     allow_open_chest = false,
                     allow_pickupitem = false,
                     allow_dropitem = true,
+                    allow_edit_sign = false, -- 允许修改告示牌
+                    allow_bone_meal = false, -- 允许使用骨粉
                     allow_shoot = false,
                     use_anvil = false,
                     use_barrel = false,
@@ -2463,6 +2466,7 @@ OpenGUI = {
             Form:addSwitch(_Tr('gui.landmgr.landperm.basic_options.place'), perm.allow_place)
             Form:addSwitch(_Tr('gui.landmgr.landperm.basic_options.destroy'), perm.allow_destroy)
             Form:addSwitch(_Tr('gui.landmgr.landperm.basic_options.entity_destroy'), perm.allow_entity_destroy)
+            Form:addSwitch(_Tr('gui.landmgr.landperm.basic_options.villager_interact'), perm.allow_villager_interact)
             Form:addSwitch(_Tr('gui.landmgr.landperm.basic_options.dropitem'), perm.allow_dropitem)
             Form:addSwitch(_Tr('gui.landmgr.landperm.basic_options.pickupitem'), perm.allow_pickupitem)
             Form:addSwitch(_Tr('gui.landmgr.landperm.basic_options.ride_entity'), perm.allow_ride_entity)
@@ -2511,6 +2515,8 @@ OpenGUI = {
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.button'), perm.use_button)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.pressure_plate'), perm.use_pressure_plate)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.armor_stand'), perm.use_armor_stand)
+            Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.edit_sign'), perm.allow_edit_sign)
+            Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.bone_meal'), perm.allow_bone_meal)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.eat'), perm.eat)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.throw_potion'), perm.allow_throw_potion)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.respawn_anchor'), perm.use_respawn_anchor)
@@ -2532,6 +2538,7 @@ OpenGUI = {
                 perm.allow_place = get()
                 perm.allow_destroy = get()
                 perm.allow_entity_destroy = get()
+                perm.allow_villager_interact = get()
                 perm.allow_dropitem = get()
                 perm.allow_pickupitem = get()
                 perm.allow_ride_entity = get()
@@ -2580,6 +2587,8 @@ OpenGUI = {
                 perm.use_button = get()
                 perm.use_pressure_plate = get()
                 perm.use_armor_stand = get()
+                perm.allow_edit_sign = get()
+                perm.allow_bone_meal = get()
                 perm.eat = get()
                 perm.allow_throw_potion = get()
                 perm.use_respawn_anchor = get()
@@ -4675,6 +4684,31 @@ mc.listen('onUseItemOn', function(player, item, block)
     local it = item.type
     local bn = block.type
 
+    local special_perm = nil
+    if string.find(bn, 'sign') then
+        special_perm = 'allow_edit_sign' -- 告示牌
+    elseif bn == 'minecraft:flower_pot' then
+        special_perm = 'allow_place' -- 花盆
+    elseif string.find(bn, 'shulker') then
+        special_perm = 'use_shulker_box' -- 潜影盒
+    elseif it == 'minecraft:bone_meal' then
+        special_perm = 'allow_bone_meal' -- 骨粉
+    elseif string.sub(it, -6, -1) == 'shovel' then
+        special_perm = 'allow_place' -- 铲子铲除
+    elseif string.find(it, '_hoe') then
+        special_perm = 'allow_place' -- 耕地
+    end
+    if special_perm and landId then
+        if Land.Util.CheckPerm(landId, xuid) then
+            return
+        end
+        if DataStorage.Land.Raw[landId].permissions[special_perm] then
+            return
+        end
+        SendText(player, _Tr('title.landlimit.noperm'))
+        return false
+    end
+
     local IsConPlus = false
     if not Map.Control.check(0, block.type) then
         if not Map.Control.check(2, item.type) then
@@ -5366,6 +5400,50 @@ mc.listen('onServerStarted', function()
         end
     end, 1000 * 60)
 end)
+
+--交互实体时
+mc.listen("onPlayerInteractEntity", function(pl, en, pos)
+    local landId = Land.Query.Pos(en.pos)
+    if not landId then
+        return
+    end
+    if pl.xuid == nil then
+        return
+    end
+    if Land.Util.CheckPerm(landId, pl.xuid) then
+        return
+    end
+
+    local perm = DataStorage.Land.Raw[landId].permissions
+
+    -- 村民交互检查
+    if en.type == 'minecraft:villager' or en.type == 'minecraft:villager_v2' then
+        if not perm.allow_villager_interact then
+            SendText(pl, _Tr('title.landlimit.noperm'))
+            return false
+        end
+        return
+    end
+
+    -- 矿车/船容器检查
+    if string.find(en.type, '_minecart') or string.find(en.type, 'chest_boat') then
+        if not perm.allow_ride_trans then
+            SendText(pl, _Tr('title.landlimit.noperm'))
+            return false
+        end
+        return
+    end
+
+    -- 生物容器检查 防止给你马凯扒下来
+    if en.type == 'minecraft:horse' or en.type == 'minecraft:mule' or en.type == 'minecraft:donkey' then
+        if not perm.allow_ride_entity then
+            SendText(pl, _Tr('title.landlimit.noperm'))
+            return false
+        end
+        return
+    end
+end)
+
 mc.listen('onBlockExplode', Callback.Event.onExplode)
 mc.listen('onEntityExplode', Callback.Event.onExplode)
 
@@ -5378,64 +5456,4 @@ Land.API.RunExport()
 INFO('Powerful land plugin is loaded! Ver-' .. Plugin.Version.toString() .. ',')
 INFO('By: RedbeanW, License: GPLv3 with additional conditions.')
 
--- 潜影盒修护
-mc.listen("onOpenContainer", function(pl, bl)
-    local landId = Land.Query.Pos(bl.pos)
-    if landId == -1 then
-        return
-    end
-    if not landId then
-        return
-    end
-    if pl.xuid == nil then
-        return
-    end
-    if Land.Util.CheckPerm(landId, pl.xuid) then
-        return
-    end
-    local perm = DataStorage.Land.Raw[landId].permissions
-    if string.find(bl.type, "shulker") and not perm.use_shulker_box then
-        SendText(pl, _Tr('title.landlimit.noperm'))
-        return false
-    end
-    if bl.type == "minecraft:chest" and not perm.allow_open_chest then
-        SendText(pl, _Tr('title.landlimit.noperm'))
-        return false
-    end
-end)
 
--- 使用物品时 (点击方块)
-mc.listen("onUseItemOn", function(pl, item, bl, side, pos)
-    local landId = Land.Query.Pos(bl.pos)
-    if landId == -1 then
-        return
-    end
-    if not landId then
-        return
-    end
-    if pl.xuid == nil then
-        return
-    end
-    if Land.Util.CheckPerm(landId, pl.xuid) then
-        return
-    end
-    if bl.type == "minecraft:grass" then
-        SendText(pl, _Tr('title.landlimit.noperm'))
-        return false
-    end
-
-    -- 告示牌修护
-    if string.find(bl.type, "sign") then
-        SendText(pl, _Tr('title.landlimit.noperm'))
-        return false
-    end
-
-    -- 龙蛋传送修护
-    if bl.type == "minecraft:dragon_egg" then
-        SendText(pl, _Tr('title.landlimit.noperm'))
-        return false
-    end -- 龙蛋传送修护
-    if string.find(bl.type, "_log") or string.find(bl.type, "_stem") then
-        return false
-    end -- 挖树皮修护
-end)
