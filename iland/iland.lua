@@ -22,6 +22,16 @@ else
     llgetNameByXuid = data.name2xuid
 end
 
+function getNameByXuid(xuid)
+    local result = llgetNameByXuid(xuid)
+    if result == "" then
+        return nil
+    else
+        return result
+    end
+end
+
+
 -- xuid2name
 if ll.hasExported("GMLIB_API", "getXuidByName") then
     llgetXuidByName = ll.import("GMLIB_API", "getXuidByName")
@@ -39,15 +49,6 @@ function getXuidByName(name)
     end
 end
 
--- 修复铭记留下的函数语义问题
-function getXuidByName(xuid)
-    local result = llgetNameByXuid(xuid)
-    if result == "" then
-        return nil
-    else
-        return result
-    end
-end
 
 Plugin = {
     Version = {
