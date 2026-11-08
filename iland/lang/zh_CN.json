@@ -243,7 +243,7 @@
     "gui.rangeselector.moveendy": "终点Y轴",
 
     "title.rangeselector.inmode": "[ 圈地模式 ]",
-    "title.rangeselector.selectpoint": "请手持 <a>\n点击方块或使用 /land set 选定 <b> 点。",
+    "title.rangeselector.selectpoint": "请手持 <a>\n点击方块或使用 /land set 选定 <b> 点。\n或者使用 /land giveup 放弃选区",
     "title.rangeselector.dimension.chose": "选择领地维度",
     "title.rangeselector.dimension.tip": "§l3D§r 选择两个点，以这两个点为顶点的长方体为领地。\n§l2D§r 以两个点确定XZ坐标，整个y轴皆为领地。",
     "title.rangeselector.dimension.blocked": "管理员已关闭此圈地模式",
@@ -271,7 +271,7 @@
     "title.getlicense.limit": "你想当地主是吧，无产阶级是不能有这么多地的。",
     "title.buyland.moneynotenough": "余额不足！\n",
     "title.buyland.fail.apirefuse": "付款过程中止，因为API拒绝创建此领地。",
-	"title.buyland.ordersaved": "您的领地购买订单已暂存，可手持 <a> 再次单击地面呼出订单\n放弃此次购买请使用\"/land giveup\"",
+    "title.buyland.ordersaved": "您的领地购买订单已暂存，可手持 <a> 再次单击地面呼出订单\n放弃此次购买请使用\"/land giveup\"",
     "title.buyland.succeed": "购买成功！\n正在为您注册领地...",
     "title.land.deleted": "<a> 已删除",
     "title.landtransfer.toomanyids": "不可以向多人过户领地",
@@ -298,9 +298,9 @@
 
     "sign.listener.ownertitle": "<a>",
     "sign.listener.ownersubtitle": "欢迎回来",
-    "sign.listener.visitortitle":"Welcome to",
-    "sign.listener.visitorsubtitle":"<a> 的领地",
-
+    "sign.listener.visitortitle": "Welcome to",
+    "sign.listener.visitorsubtitle": "<a> 的领地",
+    
     "api.safetp.tping.talk": "传送中...",
     "api.safetp.tping.disablefly": "§c请取消飞行模式",
     "api.safetp.tping.chunkloading": "区块加载中!",
@@ -310,7 +310,7 @@
     "api.safetp.fail.nofoothold": "传送点附近没有落脚点，传送失败",
 
     "api.datamgr.save.failed": "<a> 数据保存失败",
-    "talk.land.unselected":"未选择任何领地",
+    "talk.land.unselected": "未选择任何领地",
     "talk.landmgr.open": "打开领地管理器",
     "talk.scoreboard": "计分板",
     "talk.features.closed": "此功能已被领地管理员关闭",
