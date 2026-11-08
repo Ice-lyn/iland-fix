@@ -45,6 +45,7 @@
     "gui.landmgr.landperm.funcblock_options": "§l使用功能方块",
     "gui.landmgr.landperm.contblock_options": "§l使用容器方块",
     "gui.landmgr.landperm.other_options": "§l其他行为",
+
     "gui.landmgr.landperm.basic_options.place": "允许放置方块",
     "gui.landmgr.landperm.basic_options.destroy": "允许破坏方块",
     "gui.landmgr.landperm.basic_options.entity_destroy": "允许生物破坏方块（凋灵）",
@@ -56,6 +57,8 @@
     "gui.landmgr.landperm.basic_options.ride_entity": "允许骑乘生物",
     "gui.landmgr.landperm.basic_options.ride_trans": "允许乘坐矿车/船",
     "gui.landmgr.landperm.basic_options.shoot": "允许发射弹射物",
+    "gui.landmgr.landperm.basic_options.villager_interact": "允许与村民交互",
+
     "gui.landmgr.landperm.funcblock_options.crafting_table": "使用工作台",
     "gui.landmgr.landperm.funcblock_options.furnace": "允许使用熔炉",
     "gui.landmgr.landperm.funcblock_options.blast_furnace": "允许使用高炉",
@@ -70,13 +73,16 @@
     "gui.landmgr.landperm.funcblock_options.loom": "允许使用织布机",
     "gui.landmgr.landperm.funcblock_options.beacon": "允许操作信标",
     "gui.landmgr.landperm.funcblock_options.stonecutter": "允许使用切石机",
+    "gui.landmgr.landperm.funcblock_options.look_lectern": "允许查看讲台",
     "gui.landmgr.landperm.funcblock_options.lectern": "允许操作讲台",
+
     "gui.landmgr.landperm.contblock_options.barrel": "允许开桶",
     "gui.landmgr.landperm.contblock_options.hopper": "允许打开漏斗",
     "gui.landmgr.landperm.contblock_options.dropper": "允许打开投掷器",
     "gui.landmgr.landperm.contblock_options.dispenser": "允许打开发射器",
     "gui.landmgr.landperm.contblock_options.shulker_box": "允许开潜匿箱",
     "gui.landmgr.landperm.contblock_options.chest": "允许开箱",
+    
     "gui.landmgr.landperm.other_options.campfire": "允许使用营火烤肉",
     "gui.landmgr.landperm.other_options.firegen": "允许使用打火石放火",
     "gui.landmgr.landperm.other_options.door": "允许打开门",
@@ -93,6 +99,8 @@
     "gui.landmgr.landperm.other_options.button": "允许按下按钮",
     "gui.landmgr.landperm.other_options.pressure_plate": "允许踩压力板",
     "gui.landmgr.landperm.other_options.armor_stand": "允许操作盔甲架",
+    "gui.landmgr.landperm.other_options.edit_sign": "允许修改告示牌", 
+    "gui.landmgr.landperm.other_options.bone_mea": "允许使用骨粉",
     "gui.landmgr.landperm.other_options.eat": "吃东西(包括药水、牛奶等)",
     "gui.landmgr.landperm.other_options.throw_potion": "允许丢药水",
     "gui.landmgr.landperm.other_options.respawn_anchor": "允许使用重生锚",
