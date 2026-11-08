@@ -392,10 +392,6 @@ Map = {
         data = {},
         build = function()
             Map.Listener.data = Array.ToKeyMap(cfg.features.disabled_listener)
-            -- 给旧版 config.json 补上新增的监听器项，保持结构一致
-            if not Array.Fetch(cfg.features.disabled_listener, 'onPlayerInteractEntity') then
-                cfg.features.disabled_listener[#cfg.features.disabled_listener + 1] = 'onPlayerInteractEntity'
-            end
         end,
         check = function(listener)
             return Map.Listener.data[listener] == nil
