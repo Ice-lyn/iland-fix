@@ -1059,6 +1059,7 @@ DataStorage = {
                     allow_attack_animal = false,
                     allow_attack_mobs = true,
                     allow_open_chest = false,
+                    use_copper_chest = false,
                     allow_pickupitem = false,
                     allow_dropitem = true,
                     allow_edit_sign = false, -- 允许修改告示牌
@@ -2499,6 +2500,7 @@ OpenGUI = {
             Form:addSwitch(_Tr('gui.landmgr.landperm.contblock_options.dispenser'), perm.use_dispenser)
             Form:addSwitch(_Tr('gui.landmgr.landperm.contblock_options.shulker_box'), perm.use_shulker_box)
             Form:addSwitch(_Tr('gui.landmgr.landperm.contblock_options.chest'), perm.allow_open_chest)
+            Form:addSwitch(_Tr('gui.landmgr.landperm.contblock_options.copper_chest'), perm.use_copper_chest)
             Form:addLabel(_Tr('gui.landmgr.landperm.other_options'))
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.campfire'), perm.use_campfire)
             Form:addSwitch(_Tr('gui.landmgr.landperm.other_options.firegen'), perm.use_firegen)
@@ -2572,6 +2574,7 @@ OpenGUI = {
                 perm.use_dispenser = get()
                 perm.use_shulker_box = get()
                 perm.allow_open_chest = get()
+                perm.use_copper_chest = get()
 
                 perm.use_campfire = get()
                 perm.use_firegen = get()
@@ -4690,6 +4693,10 @@ mc.listen('onUseItemOn', function(player, item, block)
     local special_perm = nil
     if string.find(bn, 'sign') then
         special_perm = 'allow_edit_sign' -- 告示牌
+    elseif string.find(bn, 'copper_chest') then
+        special_perm = 'use_copper_chest' -- 铜箱子及一大坨变体
+    elseif string.find(bn, 'chest') then
+        special_perm = 'allow_open_chest' -- 普通箱子 / 陷阱箱 / 末影箱
     elseif bn == 'minecraft:flower_pot' then
         special_perm = 'allow_place' -- 花盆
     elseif string.find(bn, '_frame') then
