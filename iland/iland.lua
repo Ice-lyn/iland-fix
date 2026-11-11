@@ -228,8 +228,6 @@ Map = {
             [0] = {}, -- 主世界
             [1] = {}, -- 地狱
             [2] = {}, -- 末地
-            [3] = {},
-            [4] = {}
         },
         update = function(landId, mode)
             local TxTz = {} -- ChunkData(position)
@@ -310,17 +308,7 @@ Map = {
                     ['x'] = {},
                     ['y'] = {},
                     ['z'] = {}
-                }, -- End
-                [3] = {
-                    ['x'] = {},
-                    ['y'] = {},
-                    ['z'] = {}
-                },
-                [4] = {
-                    ['x'] = {},
-                    ['y'] = {},
-                    ['z'] = {}
-                }
+                } -- End
             },
             update = function(landId, mode)
                 local ra = Map.Land.Position.data[landId]
@@ -774,18 +762,6 @@ Dimension = {
                 name = _Tr('talk.dim.two'),
                 max = 256,
                 min = 0
-            }
-        elseif id == 3 then
-            return {
-                name = '建筑区',
-                max = 320,
-                min = -64
-            }
-        elseif id == 4 then
-            return {
-                name = '主城区',
-                max = 320,
-                min = -64
             }
         else
             return {
