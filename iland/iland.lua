@@ -12,43 +12,34 @@
 
 --]] ------------------------------------------------------
 
-local llgetNameByXuid = nil
-local llgetXuidByName = nil
+local llgetNameByXuid = ll.imports("GMLIB_API", "getNameByXuid")
+local llgetXuidByName = ll.imports("GMLIB_API", "getXuidByName")
 
--- name2xuid
-if ll.hasExported("GMLIB_API", "getNameByXuid") then
-    llgetNameByXuid = ll.import("GMLIB_API", "getNameByXuid")
-else
-    llgetNameByXuid = data.name2xuid
-end
+function getNameByXuid(name)
+    local result = data.xuid2name(name)
 
-function getNameByXuid(xuid)
-    local result = llgetNameByXuid(xuid)
-    if result == "" then
-        return nil
-    else
-        return result
+    if result == nil and llgetNameByXuid then
+        result = llgetNameByXuid(name)
+        if result == '' then
+            result = nil
+        end
     end
+
+    return result
 end
 
+function getXuidByName(xuid)
+    local result = data.name2xuid(xuid)
 
--- xuid2name
-if ll.hasExported("GMLIB_API", "getXuidByName") then
-    llgetXuidByName = ll.import("GMLIB_API", "getXuidByName")
-else
-    llgetXuidByName = data.xuid2name
-end
-
-
-function getXuidByName(name)
-    local result = llgetXuidByName(name)
-    if result == "" then
-        return nil
-    else
-        return result
+    if result == nil and llgetXuidByName then
+        result = llgetXuidByName(name)
+        if result == '' then
+            result = nil
+        end
     end
-end
 
+    return result
+end
 
 Plugin = {
     Version = {
