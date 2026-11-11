@@ -15,7 +15,7 @@
 -- 从Name获取Xuid
 local llgetXuidByName = ll.imports("GMLIB_API", "getXuidByName")
 function getXuidByName(name)
-    local result = data._name2xuid(name)
+    local result = data.name2xuid(name)
     if result == nil and llgetXuidByName then
         result = llgetXuidByName(name)
         if result == '' then
@@ -28,9 +28,9 @@ end
 -- 从Xuid获取Name
 local llgetNameByXuid = ll.imports("GMLIB_API", "getNameByXuid")
 function getNameByXuid(xuid)
-    local result = data.xuid2name(name)
+    local result = data.xuid2name(xuid)
     if result == nil and llgetNameByXuid then
-        result = llgetNameByXuid(name)
+        result = llgetNameByXuid(xuid)
         if result == '' then
             result = nil
         end
