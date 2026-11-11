@@ -102,7 +102,7 @@
     "gui.landmgr.landperm.other_options.pressure_plate": "允许踩压力板",
     "gui.landmgr.landperm.other_options.armor_stand": "允许操作盔甲架",
     "gui.landmgr.landperm.other_options.edit_sign": "允许修改告示牌", 
-    "gui.landmgr.landperm.other_options.bone_mea": "允许使用骨粉",
+    "gui.landmgr.landperm.other_options.bone_meal": "允许使用骨粉",
     "gui.landmgr.landperm.other_options.eat": "吃东西(包括药水、牛奶等)",
     "gui.landmgr.landperm.other_options.throw_potion": "允许丢药水",
     "gui.landmgr.landperm.other_options.respawn_anchor": "允许使用重生锚",
