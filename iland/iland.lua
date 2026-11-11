@@ -4666,7 +4666,7 @@ mc.listen('onUseItemOn', function(player, item, block)
         special_perm = 'allow_open_chest' -- 普通箱子 / 陷阱箱 / 末影箱
     elseif bn == 'minecraft:flower_pot' then
         special_perm = 'allow_place' -- 花盆
-    elseif string.find(bn, '_frame') then
+    elseif string.find(bn, '_shelf') then
         special_perm = 'use_display_shelf' -- 物品展示架
     elseif string.find(bn, 'shulker') then
         special_perm = 'use_shulker_box' -- 潜影盒
