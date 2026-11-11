@@ -1,8 +1,8 @@
-# iland-fix -- ILand的社区维护版
+# iland-fix -- ILand维护版
 由于ILand原项目停止维护，并且市面上其他维护板已经好久没更新了  
 顾 创建此项目 自用并公开  
 > 原项目链接: https://www.minebbs.com/resources/iland-gui-api.2162/  
-> 该修复最后更新时间: 2026/11/08  
+> 该修复最后更新时间: 2026/11/11  
 
 ## 更改项
 ### 增加
