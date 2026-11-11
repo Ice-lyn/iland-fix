@@ -1032,6 +1032,7 @@ DataStorage = {
                     use_smithing_table = false,
                     use_smoker = false,
                     use_trapdoor = false,
+                    look_lectern = false, -- 允许查看讲台
                     use_lectern = false,
                     use_cauldron = false,
                     use_lever = false,
@@ -2429,6 +2430,7 @@ OpenGUI = {
             Form:addSwitch(_Tr('gui.landmgr.landperm.funcblock_options.smithing_table'), perm.use_smithing_table)
             Form:addSwitch(_Tr('gui.landmgr.landperm.funcblock_options.loom'), perm.use_loom)
             Form:addSwitch(_Tr('gui.landmgr.landperm.funcblock_options.stonecutter'), perm.use_stonecutter)
+            Form:addSwitch(_Tr('gui.landmgr.landperm.funcblock_options.look_lectern'), perm.look_lectern)
             Form:addSwitch(_Tr('gui.landmgr.landperm.funcblock_options.lectern'), perm.use_lectern)
             Form:addSwitch(_Tr('gui.landmgr.landperm.funcblock_options.beacon'), perm.use_beacon)
             Form:addLabel(_Tr('gui.landmgr.landperm.contblock_options'))
@@ -2503,6 +2505,7 @@ OpenGUI = {
                 perm.use_smithing_table = get()
                 perm.use_loom = get()
                 perm.use_stonecutter = get()
+                perm.look_lectern = get()
                 perm.use_lectern = get()
                 perm.use_beacon = get()
 
@@ -4736,7 +4739,7 @@ mc.listen('onUseItemOn', function(player, item, block)
                 perm.use_daylight_detector then
                 return
             end -- 光线传感器（切换日夜模式）
-            if bn == 'minecraft:lectern' and perm.use_lectern then
+            if bn == 'minecraft:lectern' and perm.look_lectern then
                 return
             end -- 讲台
             if bn == 'minecraft:cauldron' and perm.use_cauldron then
