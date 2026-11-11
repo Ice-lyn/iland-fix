@@ -12,35 +12,6 @@
 
 --]] ------------------------------------------------------
 
-local llgetNameByXuid = ll.imports("GMLIB_API", "getNameByXuid")
-local llgetXuidByName = ll.imports("GMLIB_API", "getXuidByName")
-
-function getNameByXuid(name)
-    local result = data.xuid2name(name)
-
-    if result == nil and llgetNameByXuid then
-        result = llgetNameByXuid(name)
-        if result == '' then
-            result = nil
-        end
-    end
-
-    return result
-end
-
-function getXuidByName(xuid)
-    local result = data.name2xuid(xuid)
-
-    if result == nil and llgetXuidByName then
-        result = llgetXuidByName(name)
-        if result == '' then
-            result = nil
-        end
-    end
-
-    return result
-end
-
 Plugin = {
     Version = {
         major = 2,
@@ -1145,7 +1116,7 @@ DataStorage = {
             rel.Unloaded['Owner'] = {}
             local had_unloaded_xuid = false
             for xuid, landIds in pairs(localdata.Owner) do
-                if not getXuidByName(xuid) then
+                if not data.xuid2name(xuid) then
                     WARN(_Tr('console.loading.relationship.xuidinvalid', '<a>', xuid))
                     rel.Unloaded['Owner'][xuid] = landIds
                     had_unloaded_xuid = true
@@ -2146,7 +2117,7 @@ OpenGUI = {
                         for n, landId in pairs(lands) do
                             local owner = Land.RelationShip.Owner.getXuid(landId) or '?'
                             if owner ~= '?' then
-                                owner = getXuidByName(owner) or '?'
+                                owner = data.xuid2name(owner) or '?'
                             end
                             list[#list + 1] = string.gsubEx(
                                 '<name> §lID: §r<landId>§r\n§l<dimension>§r <dim> §l<a>:§r <owner>', '<a>',
@@ -2375,7 +2346,7 @@ OpenGUI = {
             local cubeInfo = Cube.GetInformation(Map.Land.Position.data[landId])
             local ownerXuid = Land.RelationShip.Owner.getXuid(landId)
             if ownerXuid then
-                ownerXuid = getXuidByName(ownerXuid)
+				ownerXuid = data.xuid2name(ownerXuid)
             end
             player:sendModalForm(_Tr('gui.landmgr.landinfo.title'),
                 _Tr('gui.landmgr.landinfo.content', '<a>', ownerXuid, '<b>', landId, '<c>',
@@ -2580,7 +2551,7 @@ OpenGUI = {
                 content = content .. '\n' .. _Tr('gui.landtrust.trusted')
             end
             for n, plXuid in pairs(shareList) do
-                local id = getXuidByName(plXuid)
+                local id = data.xuid2name(plXuid)
                 if id then
                     content = content .. '\n' .. id
                 end
@@ -2599,7 +2570,7 @@ OpenGUI = {
                 local list = {};
                 if res == 1 then -- del
                     for i, v in pairs(shareList) do
-                        list[#list + 1] = getXuidByName(v)
+                        list[#list + 1] = data.xuid2name(v)
                     end
                 elseif res == 0 then
                     list = GetPlayerList(1)
@@ -2613,7 +2584,7 @@ OpenGUI = {
                         local status_list = {}
                         if res == 0 then -- add
                             for n, ID in pairs(selected) do
-                                local targetXuid = getXuidByName(ID)
+                                local targetXuid = data.name2xuid(ID)
                                 if Land.RelationShip.Owner.getXuid(landId) == targetXuid then
                                     status_list[ID] = _Tr('gui.landtrust.fail.cantaddown')
                                     goto CONTINUE_ADDTRUST
@@ -2627,7 +2598,7 @@ OpenGUI = {
                             end
                         elseif res == 1 then -- rm
                             for n, ID in pairs(selected) do
-                                local targetXuid = getXuidByName(ID)
+                                local targetXuid = data.name2xuid(ID)
                                 Land.RelationShip.Trusted.remove(landId, targetXuid)
                                 status_list[ID] = _Tr('gui.landtrust.rmsuccess')
                             end
@@ -2695,7 +2666,7 @@ OpenGUI = {
                                 return
                             end
 
-                            local targetXuid = getXuidByName(selected[1])
+                            local targetXuid = data.name2xuid(selected[1])
                             if Land.RelationShip.Owner.check(landId, targetXuid) then
                                 SendText(pl, _Tr('title.landtransfer.canttoown'))
                                 return
@@ -3578,7 +3549,7 @@ Callback = {
                 local ownerXuid = Land.RelationShip.Owner.getXuid(landId)
                 local ownerId = '?'
                 if ownerXuid then
-                    ownerId = getXuidByName(ownerXuid) or '?'
+                    ownerId = data.xuid2name(ownerXuid) or '?'
                 end
                 local landcfg = DataStorage.Land.Raw[landId].settings
 
@@ -3628,7 +3599,7 @@ Callback = {
                 local ownerXuid = Land.RelationShip.Owner.getXuid(landId)
                 local ownerId = '?'
                 if ownerXuid then
-                    ownerId = getXuidByName(ownerXuid) or '?'
+                    ownerId = data.xuid2name(ownerXuid) or '?'
                 end
                 if Land.Util.CheckPerm(landId, xuid) then
                     if landcfg.signtome then
@@ -4093,21 +4064,21 @@ function GetPlayerList(mode, IncAll)
     end
     if mode == 0 then
         for xuid, ex in pairs(base) do
-            local t = getXuidByName(xuid)
+            local t = data.xuid2name(xuid)
             if t and t ~= '' then
                 rtn[#rtn + 1] = xuid
             end
         end
     elseif mode == 1 then
         for xuid, ex in pairs(base) do
-            local t = getXuidByName(xuid)
+            local t = data.xuid2name(xuid)
             if t and t ~= '' then
                 rtn[#rtn + 1] = t
             end
         end
     elseif mode == 2 then
         for xuid, ex in pairs(base) do
-            local t = getXuidByName(xuid)
+            local t = data.xuid2name(xuid)
             if t or t ~= '' then
                 rtn[xuid] = t
             end
@@ -4444,7 +4415,7 @@ function RegisterCommands()
     end)
     mc.regConsoleCmd('land op', _Tr('command.console.land_op'), function(args)
         local name = table.concat(args, ' ')
-        local xuid = getXuidByName(name)
+        local xuid = data.name2xuid(name)
         local stat = Land.RelationShip.Operator.add(xuid)
         if stat == 0 then
             INFO('System', _Tr('console.landop.add.success', '<a>', name, '<b>', xuid))
@@ -4456,7 +4427,7 @@ function RegisterCommands()
     end)
     mc.regConsoleCmd('land deop', _Tr('command.console.land_deop'), function(args)
         local name = table.concat(args, ' ')
-        local xuid = getXuidByName(name)
+        local xuid = data.name2xuid(name)
         local stat = Land.RelationShip.Operator.remove(xuid)
         if stat == 0 then
             INFO('System', _Tr('console.landop.del.success', '<a>', name, '<b>', xuid))
